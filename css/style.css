@@ -1,0 +1,45 @@
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--orange:#FF9900;--dark:#232F3E;--blue:#146EB4;--bg:#F7F8FA;--card:#FFF;--text:#0F1111;--textL:#565959;--green:#067D62;--warn:#C7511F;--r:12px;--sh:0 2px 8px rgba(0,0,0,.08)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+#app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+header{background:var(--dark);padding:16px 20px 0;position:sticky;top:0;z-index:100}
+.header-top{display:flex;align-items:center;gap:10px;padding-bottom:12px}
+.app-logo{font-size:24px}
+.app-title{color:var(--orange);font-size:18px;font-weight:700}
+#tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+#tabs::-webkit-scrollbar{display:none}
+.tab{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.7);padding:8px 14px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap;cursor:pointer;transition:.2s;font-family:inherit}
+.tab:hover{background:rgba(255,255,255,.2);color:#fff}
+.tab.on{background:var(--orange);color:var(--dark);font-weight:600}
+main{flex:1;padding:20px;padding-bottom:100px}
+.scr{animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.q{font-size:20px;font-weight:700;margin-bottom:12px;line-height:1.3}
+.info{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:16px;box-shadow:var(--sh);font-size:14px;line-height:1.6;color:var(--textL)}
+.info strong{color:var(--text)}
+.info a{color:var(--blue);text-decoration:none;font-weight:500}
+.hi{background:linear-gradient(135deg,#FFF8E8,#FFF3D6);border-left:4px solid var(--orange);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;margin:12px 0;font-size:13px}
+.warn{background:#FEF3E8;border-left:4px solid var(--warn);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;margin:12px 0;font-size:13px}
+.ok{background:#E8F8F4;border-left:4px solid var(--green);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;margin:12px 0;font-size:13px}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.ob{display:flex;align-items:center;gap:12px;background:var(--card);border:1.5px solid #E8E8E8;border-radius:var(--r);padding:14px 16px;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:.2s;text-align:left;font-family:inherit;width:100%;text-decoration:none}
+.ob:hover{border-color:var(--orange);box-shadow:0 4px 16px rgba(0,0,0,.12);transform:translateY(-1px)}
+.ob:active{transform:translateY(0)}
+.ob .em{font-size:20px;min-width:28px;text-align:center}
+.ob .lb{flex:1}
+.ob.lk{border-color:var(--blue);background:#F0F7FC}
+.steps{counter-reset:s;list-style:none;padding:0;margin:12px 0}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 44px;font-size:14px;line-height:1.5;border-bottom:1px solid #F0F0F0}
+.steps li:last-child{border-bottom:none}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:28px;height:28px;background:var(--orange);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.tbl th{background:var(--dark);color:#fff;padding:10px 8px;text-align:left;font-weight:600}
+.tbl td{padding:8px;border-bottom:1px solid #F0F0F0;background:#fff}
+.tbl tr:nth-child(even) td{background:#FAFAFA}
+.cl{list-style:none;padding:0;margin:12px 0}
+.cl li{padding:8px 0 8px 32px;position:relative;font-size:14px;line-height:1.5;border-bottom:1px solid #F5F5F5}
+.cl li::before{content:"\2713";position:absolute;left:4px;color:var(--green);font-weight:700;font-size:16px}
+footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #E8E8E8;padding:12px 20px;display:none;justify-content:center;gap:16px;z-index:100}
+.fb{background:none;border:none;color:var(--textL);font-size:12px;font-weight:500;cursor:pointer;padding:8px 12px;border-radius:8px;transition:.2s;font-family:inherit}
+.fb:hover{background:#F0F0F0;color:var(--text)}
+@media(max-width:480px){#app{max-width:100%}main{padding:16px;padding-bottom:90px}.q{font-size:18px}}
