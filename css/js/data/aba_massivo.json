@@ -1,0 +1,134 @@
+{
+  "inicio": {
+    "question": "Listagem em Massa (6+ produtos) \ud83d\udce6\ud83d\udce6",
+    "info": "Para listar muitos produtos de uma vez, voce precisa de uma **planilha**. Vamos te ajudar a escolher o melhor caminho.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Tenho integrador (Bling, Tiny, etc)", "next": "tem_integrador"},
+      {"emoji": "\ud83d\udcca", "text": "Ja vendo em outro marketplace", "next": "outro_marketplace"},
+      {"emoji": "\ud83c\udd95", "text": "Nunca vendi online", "next": "nunca_vendeu"}
+    ]
+  },
+  "tem_integrador": {
+    "question": "Voce tem integrador! \ud83d\udd17",
+    "info": "Integradores como Bling, Tiny, Omie, etc. conseguem enviar seus produtos direto pra Amazon.",
+    "steps": ["Acesse seu integrador", "Conecte sua conta Amazon (se ainda nao fez)", "Selecione os produtos que quer listar na Amazon", "Envie pelo integrador", "Acompanhe no Seller Central se listou"],
+    "options": [
+      {"emoji": "\u2705", "text": "Listou! Sucesso!", "next": "sucesso_massivo"},
+      {"emoji": "\u274c", "text": "Deu erro no integrador", "next": "erro_integrador"},
+      {"emoji": "\ud83d\udcde", "text": "Falar com meu AM", "next": "falar_am"}
+    ]
+  },
+  "erro_integrador": {
+    "question": "Erro no integrador?",
+    "info": "Erros comuns ao integrar com Amazon:",
+    "checklist": ["SKU duplicado", "EAN invalido ou ja usado", "Categoria restrita", "Campos obrigatorios faltando", "Erro de conexao com Amazon (reconectar)"],
+    "steps": ["Verifique o log de erros no integrador", "Corrija os campos indicados", "Tente enviar novamente", "Se persistir: entre em contato com suporte do integrador"],
+    "highlight": "O suporte do integrador (Bling, Tiny, etc) resolve a maioria dos problemas de envio. Procure o chat/suporte deles!",
+    "options": [
+      {"emoji": "\u2705", "text": "Resolvi!", "next": "sucesso_massivo"},
+      {"emoji": "\ud83d\udcde", "text": "Falar com meu AM", "next": "falar_am"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "tem_integrador"}
+    ]
+  },
+  "outro_marketplace": {
+    "question": "Ja vende em outro marketplace! \ud83d\uded2",
+    "info": "Se voce ja vende no Mercado Livre, Shopee, Magalu, etc., provavelmente ja tem uma planilha ou integrador com seus produtos.",
+    "options": [
+      {"emoji": "\ud83d\udcca", "text": "Tenho planilha pronta dos produtos", "next": "tem_planilha"},
+      {"emoji": "\ud83d\udd17", "text": "Uso integrador (Bling, Tiny)", "next": "tem_integrador"},
+      {"emoji": "\u274c", "text": "Nao tenho planilha", "next": "sem_planilha"}
+    ]
+  },
+  "nunca_vendeu": {
+    "question": "Primeira vez vendendo online!",
+    "info": "Sem problema! Para listagem em massa voce vai precisar de uma planilha com seus produtos. Vamos te ajudar.",
+    "options": [
+      {"emoji": "\ud83d\udcca", "text": "Tenho planilha dos meus produtos", "next": "tem_planilha"},
+      {"emoji": "\u274c", "text": "Nao tenho nada organizado", "next": "sem_planilha"}
+    ]
+  },
+  "tem_planilha": {
+    "question": "Otimo! Voce tem planilha!",
+    "info": "Agora precisa usar o **Listing Hub** da Amazon pra subir em massa. O Listing Hub aceita planilha e lista tudo de uma vez.",
+    "steps": ["Seller Central > Catalogo > Listing Hub", "Clique em 'Upload de arquivo'", "Baixe o modelo/template da categoria", "Preencha com seus dados (ou adapte sua planilha)", "Faca upload", "Acompanhe o status"],
+    "warning": "A planilha precisa seguir o formato exato da Amazon. Use o template deles como base!",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Tutorial Listing Hub", "link": "https://sellercentral.amazon.com.br/listing/hub"},
+      {"emoji": "\u2705", "text": "Upload feito! Sucesso!", "next": "sucesso_massivo"},
+      {"emoji": "\u274c", "text": "Deu erro no upload", "next": "erro_upload"},
+      {"emoji": "\ud83e\udd14", "text": "Nao sei preencher a planilha", "next": "ajuda_planilha"}
+    ]
+  },
+  "sem_planilha": {
+    "question": "Sem planilha? Vamos resolver!",
+    "info": "Voce tem algumas opcoes:",
+    "options": [
+      {"emoji": "\ud83d\udcf8", "text": "Tenho fotos dos produtos no celular", "next": "so_fotos"},
+      {"emoji": "\ud83d\udce6", "text": "Tenho os produtos fisicos aqui", "next": "so_fotos"},
+      {"emoji": "\ud83d\udccb", "text": "Quero aprender a criar a planilha", "next": "ajuda_planilha"}
+    ]
+  },
+  "so_fotos": {
+    "question": "So tem fotos? Sem problema!",
+    "info": "Para subir em massa voce VAI precisar organizar numa planilha. Mas calma, vamos simplificar!",
+    "steps": ["Baixe o template da Amazon no Listing Hub", "Preencha o basico: titulo, preco, quantidade, imagem", "Para imagens: suba no Google Drive e use o link publico", "Faca o upload da planilha"],
+    "highlight": "Dica para gerar link da imagem:\\n1. Suba a foto no Google Drive\\n2. Compartilhe como 'Qualquer pessoa com link'\\n3. Copie o link e use na planilha",
+    "options": [
+      {"emoji": "\ud83d\udccb", "text": "Como preencher a planilha", "next": "ajuda_planilha"},
+      {"emoji": "\ud83d\udd17", "text": "Tutorial Google Drive imagens", "next": "tutorial_drive"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "sem_planilha"}
+    ]
+  },
+  "tutorial_drive": {
+    "question": "Como gerar link de imagem (Google Drive):",
+    "steps": ["Abra o Google Drive (drive.google.com)", "Clique em '+ Novo' > 'Upload de arquivo'", "Suba suas fotos dos produtos", "Clique com botao direito na foto > 'Compartilhar'", "Mude para 'Qualquer pessoa com link'", "Copie o link", "Cole na coluna de imagem da planilha Amazon"],
+    "warning": "O link precisa ser PUBLICO senao a Amazon nao consegue acessar a imagem!",
+    "options": [
+      {"emoji": "\u2705", "text": "Entendi!", "next": "tem_planilha"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "so_fotos"}
+    ]
+  },
+  "ajuda_planilha": {
+    "question": "Como preencher a planilha Amazon:",
+    "info": "A planilha tem muitas colunas, mas as **obrigatorias** sao poucas:",
+    "checklist": ["SKU (seu codigo interno)", "Titulo do produto", "Preco", "Quantidade em estoque", "Imagem principal (link)", "Marca (ou 'Generico')", "EAN (ou 'Nao se aplica')", "Categoria"],
+    "steps": ["Seller Central > Catalogo > Listing Hub", "Clique 'Baixar template' da sua categoria", "Abra no Excel ou Google Sheets", "Preencha APENAS as colunas obrigatorias primeiro", "Salve como .xlsx ou .csv", "Faca upload no Listing Hub"],
+    "highlight": "Dica: Nao tente preencher TODAS as colunas. Comece so com as obrigatorias. Depois voce complementa!",
+    "options": [
+      {"emoji": "\u2705", "text": "Preenchi! Vou fazer upload", "next": "tem_planilha"},
+      {"emoji": "\u274c", "text": "Nao entendi - preciso de ajuda", "next": "falar_am"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "sem_planilha"}
+    ]
+  },
+  "erro_upload": {
+    "question": "Erro no upload da planilha?",
+    "info": "Erros comuns:",
+    "checklist": ["Formato errado (precisa ser .xlsx ou .csv)", "Colunas obrigatorias vazias", "EAN duplicado ou invalido", "Preco com formato errado (use ponto, nao virgula)", "Imagem com link quebrado", "Categoria errada"],
+    "steps": ["Baixe o relatorio de erros no Listing Hub", "Veja quais linhas deram erro", "Corrija na planilha", "Faca upload novamente"],
+    "options": [
+      {"emoji": "\u2705", "text": "Corrigi! Sucesso!", "next": "sucesso_massivo"},
+      {"emoji": "\ud83d\udcde", "text": "Nao consigo - Falar com AM", "next": "falar_am"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "tem_planilha"}
+    ]
+  },
+  "sucesso_massivo": {
+    "question": "Parabens! Produtos listados em massa! \ud83c\udf89",
+    "success": "Seus produtos estao sendo processados. Pode levar ate 30 min pra todos aparecerem.",
+    "info": "Proximos passos:",
+    "options": [
+      {"emoji": "\u2b50", "text": "Melhorar qualidade dos anuncios", "next": "catalogo"},
+      {"emoji": "\ud83d\udce2", "text": "Criar anuncios (Ads)", "next": "ads"},
+      {"emoji": "\ud83c\udff7\ufe0f", "text": "Criar promocoes", "next": "promocoes"},
+      {"emoji": "\ud83d\ude9a", "text": "Configurar envio", "next": "logistica"},
+      {"emoji": "\ud83c\[PASSWORD]", "text": "Voltar ao inicio", "next": "inicio"}
+    ]
+  },
+  "falar_am": {
+    "question": "Falar com seu Account Manager",
+    "info": "Se tem AM, entre em contato.\\nSe nao: **Seller Central > Ajuda > Obter ajuda**",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Abrir chamado", "link": "https://sellercentral.amazon.com.br/help/hub"},
+      {"emoji": "\ud83c\[PASSWORD]", "text": "Voltar ao inicio", "next": "inicio"}
+    ]
+  }
+}
