@@ -1,0 +1,157 @@
+{
+  "inicio": {
+    "question": "Categorias Restritas \ud83d\udeab",
+    "info": "Algumas categorias precisam de **aprovacao** antes de vender. Veja se seu produto precisa.",
+    "options": [
+      {"emoji": "\ud83d\udd25", "text": "Principais categorias restritas", "next": "principais"},
+      {"emoji": "\ud83d\udccb", "text": "Lista completa", "next": "lista_completa"},
+      {"emoji": "\u2753", "text": "Como pedir aprovacao?", "next": "como_pedir"},
+      {"emoji": "\ud83d\udd17", "text": "Pagina oficial Amazon", "link": "https://sellercentral.amazon.com.br/help/hub/reference/external/G200164330?locale=pt-BR"}
+    ]
+  },
+  "principais": {
+    "question": "Categorias mais comuns que pedem aprovacao:",
+    "info": "Estas sao as que nossos sellers mais encontram:",
+    "options": [
+      {"emoji": "\ud83d\udc5f", "text": "Roupas, Calcados e Acessorios", "next": "cat_roupas"},
+      {"emoji": "\ud83d\udc84", "text": "Beleza e Cosmeticos", "next": "cat_beleza"},
+      {"emoji": "\ud83c\udf4e", "text": "Alimentos e Bebidas", "next": "cat_alimentos"},
+      {"emoji": "\ud83d\udc76", "text": "Produtos para Bebes", "next": "cat_bebes"},
+      {"emoji": "\ud83c\udfae", "text": "Games e Videogames", "next": "cat_games"},
+      {"emoji": "\ud83d\udcf1", "text": "Eletronicos (algumas subcategorias)", "next": "cat_eletronicos"},
+      {"emoji": "\ud83d\udccb", "text": "Ver todas as categorias", "next": "lista_completa"}
+    ]
+  },
+  "cat_roupas": {
+    "question": "\ud83d\udc5f Roupas, Calcados e Acessorios",
+    "info": "Categoria restrita. Precisa de aprovacao.",
+    "checklist": ["Marca registrada OU generico", "Fotos profissionais dos produtos", "NF comprovando origem", "Produtos originais (sem replica)"],
+    "steps": ["Seller Central > Catalogo > Adicionar produtos", "Selecione a categoria", "Sistema vai pedir aprovacao", "Envie documentos solicitados", "Aguarde (pode levar ate 7 dias)"],
+    "options": [
+      {"emoji": "\u2753", "text": "Como pedir aprovacao", "next": "como_pedir"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "principais"}
+    ]
+  },
+  "cat_beleza": {
+    "question": "\ud83d\udc84 Beleza e Cosmeticos",
+    "info": "Categoria restrita. Produtos de beleza precisam de aprovacao e documentacao ANVISA.",
+    "checklist": ["Registro/notificacao ANVISA do produto", "NF de compra", "Fotos do produto com rotulo legivel", "Produto dentro da validade"],
+    "warning": "Produtos sem registro ANVISA NAO podem ser vendidos!",
+    "options": [
+      {"emoji": "\u2753", "text": "Como pedir aprovacao", "next": "como_pedir"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "principais"}
+    ]
+  },
+  "cat_alimentos": {
+    "question": "\ud83c\udf4e Alimentos e Bebidas",
+    "info": "Categoria restrita. Alimentos precisam de cuidados especiais.",
+    "checklist": ["Registro no MAPA ou vigilancia sanitaria", "Rotulo com informacoes nutricionais", "Data de validade visivel", "Embalagem adequada para transporte", "NF comprovando origem"],
+    "warning": "Produtos pereciveis tem regras adicionais de armazenamento!",
+    "options": [
+      {"emoji": "\u2753", "text": "Como pedir aprovacao", "next": "como_pedir"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "principais"}
+    ]
+  },
+  "cat_bebes": {
+    "question": "\ud83d\udc76 Produtos para Bebes",
+    "info": "Categoria restrita por seguranca. Precisa comprovar qualidade.",
+    "checklist": ["Certificacao INMETRO (quando aplicavel)", "NF comprovando origem", "Produto original (sem replica)", "Fotos com selos de seguranca visiveis"],
+    "options": [
+      {"emoji": "\u2753", "text": "Como pedir aprovacao", "next": "como_pedir"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "principais"}
+    ]
+  },
+  "cat_games": {
+    "question": "\ud83c\udfae Games e Videogames",
+    "info": "Categoria restrita. Jogos e consoles precisam de aprovacao.",
+    "checklist": ["NF comprovando origem", "Produtos originais (sem pirataria)", "Embalagem lacrada (jogos novos)"],
+    "options": [
+      {"emoji": "\u2753", "text": "Como pedir aprovacao", "next": "como_pedir"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "principais"}
+    ]
+  },
+  "cat_eletronicos": {
+    "question": "\ud83d\udcf1 Eletronicos (subcategorias restritas)",
+    "info": "Nem todos eletronicos sao restritos, mas algumas subcategorias pedem aprovacao.",
+    "checklist": ["Homologacao ANATEL (pra produtos com bluetooth/wifi/celular)", "NF comprovando origem", "Produto com selo ANATEL visivel", "Certificacao INMETRO (quando aplicavel)"],
+    "warning": "Produtos com sinal (bluetooth, wifi, celular) PRECISAM de homologacao ANATEL!",
+    "options": [
+      {"emoji": "\u2753", "text": "Como pedir aprovacao", "next": "como_pedir"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "principais"}
+    ]
+  },
+  "lista_completa": {
+    "question": "Lista completa de categorias restritas:",
+    "info": "Todas as categorias que podem pedir aprovacao na Amazon Brasil:",
+    "table": {
+      "headers": ["Categoria", "Tipo"],
+      "rows": [
+        ["Roupas, Calcados e Acessorios", "Aprovacao"],
+        ["Beleza e Cosmeticos", "Aprovacao + ANVISA"],
+        ["Alimentos e Bebidas", "Aprovacao + Docs"],
+        ["Produtos para Bebes", "Aprovacao + INMETRO"],
+        ["Games e Videogames", "Aprovacao"],
+        ["Eletronicos (sub)", "Aprovacao + ANATEL"],
+        ["Suplementos Alimentares", "Aprovacao + ANVISA"],
+        ["Saude e Cuidados Pessoais", "Aprovacao"],
+        ["Joias", "Aprovacao"],
+        ["Relogios", "Aprovacao"],
+        ["Automotivo (sub)", "Aprovacao"],
+        ["Instrumentos Musicais", "Aprovacao"],
+        ["Esportes (sub)", "Aprovacao"],
+        ["Brinquedos (sub)", "Aprovacao + INMETRO"],
+        ["Pet Shop (sub)", "Aprovacao"],
+        ["Ferramentas (sub)", "Aprovacao"],
+        ["Bebidas Alcoolicas", "Proibido"],
+        ["Tabaco", "Proibido"],
+        ["Armas", "Proibido"],
+        ["Medicamentos", "Proibido"],
+        ["Produtos ilegais", "Proibido"]
+      ]
+    },
+    "warning": "Categorias marcadas como 'Proibido' NAO podem ser vendidas na Amazon em nenhuma circunstancia.",
+    "options": [
+      {"emoji": "\u2753", "text": "Como pedir aprovacao", "next": "como_pedir"},
+      {"emoji": "\ud83d\udd17", "text": "Pagina oficial completa", "link": "https://sellercentral.amazon.com.br/help/hub/reference/external/G200164330?locale=pt-BR"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "como_pedir": {
+    "question": "Como pedir aprovacao para categoria restrita:",
+    "steps": ["Seller Central > Catalogo > Adicionar produtos", "Busque o produto ou selecione a categoria", "Se restrita: aparece botao 'Solicitar aprovacao'", "Clique em 'Solicitar aprovacao'", "Envie os documentos pedidos (NF, certificacoes, fotos)", "Aguarde analise (pode levar de 1 a 7 dias)", "Se aprovado: pode listar normalmente!"],
+    "info": "Documentos mais pedidos:\\n- Nota Fiscal\\n- Certificacoes (ANVISA, ANATEL, INMETRO)\\n- Fotos do produto\\n- Comprovante de autenticidade",
+    "options": [
+      {"emoji": "\u2705", "text": "Fui aprovado!", "next": "aprovado"},
+      {"emoji": "\u274c", "text": "Negaram meu pedido", "next": "negado"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "aprovado": {
+    "question": "Aprovado! \ud83c\udf89",
+    "success": "Voce ja pode listar nessa categoria! Va em Catalogo > Adicionar produtos e liste normalmente.",
+    "options": [
+      {"emoji": "\ud83d\udce6", "text": "Ir listar (1 a 1)", "next": "listar"},
+      {"emoji": "\ud83d\udce6\ud83d\udce6", "text": "Ir listar (massivo)", "next": "massivo"},
+      {"emoji": "\ud83c\udfe0", "text": "Inicio", "next": "inicio"}
+    ]
+  },
+  "negado": {
+    "question": "Pedido negado? Veja o motivo:",
+    "info": "Motivos comuns de negativa:",
+    "checklist": ["NF muito antiga (precisa ser recente)", "Documento ilegivel", "Certificacao faltando", "Produto nao permitido na categoria", "Informacoes inconsistentes"],
+    "steps": ["Leia o email de negativa com atencao", "Identifique o que faltou", "Corrija o documento/informacao", "Solicite novamente"],
+    "options": [
+      {"emoji": "\ud83d\udd04", "text": "Tentar de novo", "next": "como_pedir"},
+      {"emoji": "\ud83d\udcde", "text": "Falar com AM", "next": "falar_am"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "falar_am": {
+    "question": "Falar com seu Account Manager",
+    "info": "Se tem AM, fale direto.\\nSe nao: **Seller Central > Ajuda > Obter ajuda**",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Abrir chamado", "link": "https://sellercentral.amazon.com.br/help/hub"},
+      {"emoji": "\ud83c\udfe0", "text": "Inicio", "next": "inicio"}
+    ]
+  }
+}
