@@ -1,0 +1,174 @@
+{
+  "inicio": {
+    "question": "Custos e Comissoes \ud83d\udcb0",
+    "info": "Entenda quanto custa vender na Amazon. O custo varia de acordo com o **plano de venda** e a **categoria** do produto.",
+    "options": [
+      {"emoji": "\ud83d\udccb", "text": "Planos de venda", "next": "planos"},
+      {"emoji": "\ud83d\udcb8", "text": "Comissoes por categoria", "next": "comissoes"},
+      {"emoji": "\ud83e\udde0", "text": "Resumo rapido: quanto vou pagar?", "next": "resumo"}
+    ]
+  },
+  "resumo": {
+    "question": "Resumo rapido: quanto custa vender?",
+    "info": "De forma simples, voce paga:",
+    "table": {
+      "headers": ["Item", "Valor"],
+      "rows": [
+        ["Plano Individual", "R$ 2,00 por venda"],
+        ["Plano Profissional", "R$ 19,90/mes (vendas ilimitadas)"],
+        ["Comissao por venda", "8% a 15% (depende da categoria)"],
+        ["FBA (se usar)", "Varia por peso/tamanho"],
+        ["Frete DBA (se usar)", "Tabela Amazon"]
+      ]
+    },
+    "highlight": "Se voce vende mais de 10 produtos por mes, o plano Profissional (R$ 19,90) ja vale mais a pena!",
+    "options": [
+      {"emoji": "\ud83d\udccb", "text": "Detalhes dos planos", "next": "planos"},
+      {"emoji": "\ud83d\udcb8", "text": "Ver comissoes por categoria", "next": "comissoes"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "planos": {
+    "question": "Planos de Venda Amazon",
+    "info": "A Amazon oferece 2 planos:",
+    "table": {
+      "headers": ["", "Individual", "Profissional"],
+      "rows": [
+        ["Mensalidade", "Gratis", "R$ 19,90/mes"],
+        ["Taxa por venda", "R$ 2,00 cada", "Sem taxa por venda"],
+        ["Ideal para", "Ate 10 vendas/mes", "10+ vendas/mes"],
+        ["Ads", "Nao", "Sim"],
+        ["Promotions", "Nao", "Sim"],
+        ["Buy Box", "Limitado", "Sim"],
+        ["Relatorios", "Basico", "Completo"]
+      ]
+    },
+    "highlight": "Fez mais de 10 vendas no mes? Migre pro Profissional! Voce economiza.",
+    "options": [
+      {"emoji": "\ud83d\udcb8", "text": "Ver comissoes por categoria", "next": "comissoes"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "comissoes": {
+    "question": "Comissoes por Categoria",
+    "info": "A Amazon cobra uma **porcentagem** sobre cada venda. O percentual depende da categoria do produto.\\n\\nClique na sua categoria para ver:",
+    "options": [
+      {"emoji": "\ud83d\udcf1", "text": "Eletronicos e Informatica", "next": "com_eletronicos"},
+      {"emoji": "\ud83d\udc5a", "text": "Roupas e Acessorios", "next": "com_roupas"},
+      {"emoji": "\ud83c\udfe0", "text": "Casa e Cozinha", "next": "com_casa"},
+      {"emoji": "\ud83c\udfae", "text": "Games e Brinquedos", "next": "com_games"},
+      {"emoji": "\ud83d\udc84", "text": "Beleza e Saude", "next": "com_beleza"},
+      {"emoji": "\ud83c\udf4e", "text": "Alimentos", "next": "com_alimentos"},
+      {"emoji": "\ud83d\udcda", "text": "Livros e Papelaria", "next": "com_livros"},
+      {"emoji": "\ud83c\udfcb\ufe0f", "text": "Esportes", "next": "com_esportes"},
+      {"emoji": "\ud83d\udc36", "text": "Pet Shop", "next": "com_pet"},
+      {"emoji": "\ud83d\udccb", "text": "Tabela completa", "next": "tabela_completa"}
+    ]
+  },
+  "com_eletronicos": {
+    "question": "\ud83d\udcf1 Eletronicos e Informatica",
+    "info": "Comissao: **~12% a 15%**\\n\\nInclui: celulares, notebooks, tablets, acessorios, cameras, TVs, audio.",
+    "warning": "Valores aproximados! Sempre consulte o site oficial para taxas atualizadas.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "com_roupas": {
+    "question": "\ud83d\udc5a Roupas e Acessorios",
+    "info": "Comissao: **~13% a 15%**\\n\\nInclui: roupas, calcados, bolsas, relogios, joias, acessorios.",
+    "warning": "Valores aproximados! Sempre consulte o site oficial.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "com_casa": {
+    "question": "\ud83c\udfe0 Casa e Cozinha",
+    "info": "Comissao: **~13% a 15%**\\n\\nInclui: moveis, decoracao, utensilios, cama/mesa/banho, eletrodomesticos.",
+    "warning": "Valores aproximados! Sempre consulte o site oficial.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "com_games": {
+    "question": "\ud83c\udfae Games e Brinquedos",
+    "info": "Comissao: **~12% a 15%**\\n\\nInclui: consoles, jogos, acessorios gamer, brinquedos, jogos de tabuleiro.",
+    "warning": "Valores aproximados! Sempre consulte o site oficial.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "com_beleza": {
+    "question": "\ud83d\udc84 Beleza e Saude",
+    "info": "Comissao: **~12% a 15%**\\n\\nInclui: cosmeticos, perfumes, maquiagem, suplementos, higiene pessoal.",
+    "warning": "Valores aproximados! Sempre consulte o site oficial.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "com_alimentos": {
+    "question": "\ud83c\udf4e Alimentos",
+    "info": "Comissao: **~8% a 10%**\\n\\nInclui: alimentos, bebidas, snacks, suplementos alimentares.",
+    "highlight": "Alimentos tem uma das comissoes mais baixas!",
+    "warning": "Valores aproximados! Sempre consulte o site oficial.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "com_livros": {
+    "question": "\ud83d\udcda Livros e Papelaria",
+    "info": "Comissao: **~15%**\\n\\nInclui: livros, ebooks, material escolar, papelaria, artigos de escritorio.",
+    "warning": "Valores aproximados! Sempre consulte o site oficial.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "com_esportes": {
+    "question": "\ud83c\udfcb\ufe0f Esportes",
+    "info": "Comissao: **~13% a 15%**\\n\\nInclui: equipamentos, roupas esportivas, suplementos, acessorios fitness.",
+    "warning": "Valores aproximados! Sempre consulte o site oficial.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "com_pet": {
+    "question": "\ud83d\udc36 Pet Shop",
+    "info": "Comissao: **~12% a 15%**\\n\\nInclui: racao, brinquedos pet, acessorios, higiene animal.",
+    "warning": "Valores aproximados! Sempre consulte o site oficial.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver taxas oficiais", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  },
+  "tabela_completa": {
+    "question": "Tabela resumo de comissoes:",
+    "table": {
+      "headers": ["Categoria", "Comissao aprox."],
+      "rows": [
+        ["Alimentos e Bebidas", "8% - 10%"],
+        ["Eletronicos", "12% - 15%"],
+        ["Informatica", "12% - 15%"],
+        ["Games e Brinquedos", "12% - 15%"],
+        ["Beleza e Saude", "12% - 15%"],
+        ["Pet Shop", "12% - 15%"],
+        ["Esportes", "13% - 15%"],
+        ["Casa e Cozinha", "13% - 15%"],
+        ["Roupas e Acessorios", "13% - 15%"],
+        ["Livros e Papelaria", "15%"],
+        ["Automotivo", "12% - 15%"]
+      ]
+    },
+    "warning": "Valores APROXIMADOS! Sempre consulte o site oficial para taxas exatas e atualizadas.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Site oficial de precos Amazon", "link": "https://venda.amazon.com.br/pricing"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "comissoes"}
+    ]
+  }
+}
