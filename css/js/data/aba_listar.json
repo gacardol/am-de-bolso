@@ -1,0 +1,272 @@
+{
+  "inicio": {
+    "question": "Vamos listar seu produto! \ud83d\ude80",
+    "info": "Vou te guiar passo a passo, como se estivesse numa call com seu Account Manager. Sem complicacao!",
+    "options": [
+      {"emoji": "\ud83d\udce6", "text": "Poucos (1 a 5 produtos)", "next": "novo_usado"},
+      {"emoji": "\ud83d\ude80", "text": "Muitos (6+ produtos)", "next": "ir_massivo"}
+    ]
+  },
+  "ir_massivo": {
+    "question": "Para listar muitos produtos, va na aba Massivo!",
+    "info": "Clique na aba **\ud83d\udce6\ud83d\udce6 Massivo** no menu acima para ver o passo a passo de listagem em massa.",
+    "options": [
+      {"emoji": "\ud83d\udce6\ud83d\udce6", "text": "Ir para aba Massivo", "next": "massivo"}
+    ]
+  },
+  "novo_usado": {
+    "question": "Seu produto e novo ou usado?",
+    "options": [
+      {"emoji": "\ud83c\udd95", "text": "Novo", "next": "tem_ean"},
+      {"emoji": "\u267b\ufe0f", "text": "Usado / Seminovo", "next": "usado"}
+    ]
+  },
+  "usado": {
+    "question": "Produto usado ou seminovo?",
+    "info": "A Amazon tem um programa especifico para produtos usados: **Amazon Seminovos**.",
+    "steps": ["Acesse: venda.amazon.com.br/seminovos", "Registre-se no programa", "Liste seus produtos seguindo as regras de condicao"],
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Acessar Amazon Seminovos", "link": "https://venda.amazon.com.br/seminovos"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar (meu produto e novo)", "next": "tem_ean"}
+    ]
+  },
+  "tem_ean": {
+    "question": "Seu produto tem codigo de barras (EAN)?",
+    "info": "EAN e o codigo de barras na embalagem (numeros embaixo das barrinhas). Geralmente tem 13 digitos.",
+    "options": [
+      {"emoji": "\u2705", "text": "Sim, tenho EAN", "next": "validar_ean"},
+      {"emoji": "\u274c", "text": "Nao tenho EAN", "next": "marca_pergunta"}
+    ]
+  },
+  "validar_ean": {
+    "question": "Valide seu EAN antes de listar!",
+    "info": "Confirme que ele esta valido no site oficial GS1. Isso evita erros.",
+    "steps": ["Acesse o link abaixo", "Digite seu EAN (13 digitos)", "Se aparecer seu produto = EAN valido!", "Se nao encontrar = EAN pode estar inativo"],
+    "options": [
+      {"emoji": "\ud83d\udd0d", "text": "Validar EAN no GS1", "link": "https://www.gs1.org/services/verified-by-gs1/results"},
+      {"emoji": "\u2705", "text": "EAN valido! Proximo passo", "next": "ean_marca"},
+      {"emoji": "\u274c", "text": "EAN invalido ou nao encontrou", "next": "ean_invalido"}
+    ]
+  },
+  "ean_invalido": {
+    "question": "EAN invalido ou nao encontrado",
+    "info": "O GS1 nao reconheceu. Pode ser que:\\n- Fabricante nao registrou\\n- EAN inativo\\n- Digitou errado",
+    "options": [
+      {"emoji": "\ud83d\udd04", "text": "Tentar de novo", "next": "validar_ean"},
+      {"emoji": "\u274c", "text": "Listar sem EAN", "next": "marca_pergunta"},
+      {"emoji": "\ud83d\udcde", "text": "Falar com meu AM", "next": "falar_am"}
+    ]
+  },
+  "ean_marca": {
+    "question": "Seu produto tem marca na embalagem?",
+    "info": "Marca impressa, gravada ou estampada. **Adesivo ou costurado NAO conta.**",
+    "options": [
+      {"emoji": "\u2705", "text": "Sim, tem marca", "next": "marca_propria_terceiro"},
+      {"emoji": "\u274c", "text": "Nao (generico)", "next": "listar_generico_ean"}
+    ]
+  },
+  "marca_pergunta": {
+    "question": "Seu produto tem marca ou logo no produto/embalagem?",
+    "info": "Precisa estar **impressa, gravada ou estampada**. Adesivo ou costurado NAO conta.",
+    "options": [
+      {"emoji": "\u2705", "text": "Sim, tem marca", "next": "marca_propria_terceiro_sem"},
+      {"emoji": "\u274c", "text": "Nao, sem marca", "next": "listar_generico"}
+    ]
+  },
+  "marca_propria_terceiro": {
+    "question": "A marca e sua ou voce revende?",
+    "options": [
+      {"emoji": "\ud83d\udc51", "text": "Marca propria (sou o dono)", "next": "marca_inpi"},
+      {"emoji": "\ud83d\uded2", "text": "Revendo (marca de terceiro)", "next": "revendedor_nf"}
+    ]
+  },
+  "marca_propria_terceiro_sem": {
+    "question": "A marca e sua ou voce revende?",
+    "options": [
+      {"emoji": "\ud83d\udc51", "text": "Marca propria (sou o dono)", "next": "marca_inpi"},
+      {"emoji": "\ud83d\uded2", "text": "Revendo (marca de terceiro)", "next": "revendedor_nf"}
+    ]
+  },
+  "marca_inpi": {
+    "question": "Sua marca tem registro no INPI?",
+    "info": "INPI = Instituto Nacional de Propriedade Industrial. Registra marcas no Brasil.",
+    "options": [
+      {"emoji": "\u2705", "text": "Sim, tenho INPI (ou em processo)", "next": "brand_registry"},
+      {"emoji": "\u274c", "text": "Nao tenho INPI", "next": "sem_inpi_logo"}
+    ]
+  },
+  "brand_registry": {
+    "question": "Registre sua marca na Amazon (Brand Registry)!",
+    "info": "Com INPI voce pode registrar no Brand Registry. Beneficios:\\n- Protecao contra copias\\n- A+ Content\\n- Brand Store\\n- Mais controle",
+    "steps": ["Acesse o Brand Registry", "Login com conta Seller", "Insira numero do INPI", "Envie informacoes", "Aguarde aprovacao", "Apos aprovado, liste normalmente!"],
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Acessar Brand Registry", "link": "https://brandservices.amazon.com.br"},
+      {"emoji": "\u2705", "text": "Ja tenho Brand Registry!", "next": "listar_com_marca"},
+      {"emoji": "\u23f3", "text": "INPI em processo - posso?", "next": "inpi_processo"}
+    ]
+  },
+  "inpi_processo": {
+    "question": "INPI em processo? Pode registrar!",
+    "info": "Se seu INPI esta **em andamento**, ja pode solicitar o Brand Registry! A Amazon aceita marcas em processo.",
+    "success": "Va em Brand Registry com seu numero de processo INPI!",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Acessar Brand Registry", "link": "https://brandservices.amazon.com.br"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "brand_registry"}
+    ]
+  },
+  "sem_inpi_logo": {
+    "question": "Sem INPI... Mas a marca aparece NO produto?",
+    "info": "Mesmo sem INPI, se o nome/logo esta **fisicamente no produto** (impresso, gravado), voce pode comprovar com fotos.",
+    "warning": "NAO pode ser adesivo, etiqueta colada ou costurado.",
+    "options": [
+      {"emoji": "\u2705", "text": "Sim! Logo aparece no produto", "next": "listar_com_fotos"},
+      {"emoji": "\u274c", "text": "Nao aparece", "next": "listar_generico"}
+    ]
+  },
+  "listar_com_fotos": {
+    "question": "Voce consegue listar com fotos!",
+    "info": "A Amazon permite listar sem INPI se comprovar com fotos que a marca esta no produto.",
+    "steps": ["Ao listar, coloque o nome da sua marca", "Sistema vai pedir comprovacao", "Envie fotos claras com marca visivel", "Diferentes angulos", "Aguarde aprovacao"],
+    "highlight": "Dica: Tenha site ou redes sociais da marca. Ajuda na aprovacao!",
+    "options": [
+      {"emoji": "\u2705", "text": "Entendi! Vou listar", "next": "listar_com_marca"},
+      {"emoji": "\ud83d\udcf8", "text": "Que tipo de foto?", "next": "fotos_marca"}
+    ]
+  },
+  "fotos_marca": {
+    "question": "Fotos para comprovar marca:",
+    "checklist": ["Foto do produto com marca visivel (frente)", "Foto de outro angulo mostrando a marca", "Foto da embalagem com marca (se tiver)", "Boa iluminacao e foco na marca"],
+    "options": [
+      {"emoji": "\u2705", "text": "Entendi! Vou listar", "next": "listar_com_marca"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "listar_com_fotos"}
+    ]
+  },
+  "revendedor_nf": {
+    "question": "Tem NF com 10+ produtos dessa marca na MESMA nota?",
+    "warning": "Precisa ser 10+ unidades na MESMA NF. Nao pode juntar notas.",
+    "options": [
+      {"emoji": "\u2705", "text": "Sim, tenho NF com 10+", "next": "listar_revendedor"},
+      {"emoji": "\u274c", "text": "Nao tenho", "next": "sem_nf"}
+    ]
+  },
+  "listar_revendedor": {
+    "question": "Otimo! Vamos listar como revendedor.",
+    "steps": ["Seller Central > Catalogo > Adicionar produtos", "Busque pelo nome ou EAN", "Se ja existe: clique VENDER ESTE PRODUTO", "Se nao existe: crie listing novo", "Sistema vai pedir autorizacao de marca", "Envie sua NF com 10+ produtos", "Aguarde aprovacao"],
+    "info": "Acompanhe em: **Seller Central > Ajuda > Gerenciar ajuda**",
+    "options": [
+      {"emoji": "\u2705", "text": "Aprovaram! Sucesso!", "next": "sucesso"},
+      {"emoji": "\u274c", "text": "Recusaram minha NF", "next": "nf_recusada"},
+      {"emoji": "\ud83d\udd04", "text": "Deu match (ja existe)", "next": "match_info"}
+    ]
+  },
+  "nf_recusada": {
+    "question": "NF recusada? Verifique:",
+    "checklist": ["NF emitida nos ultimos 365 dias", "Minimo 10 unidades na MESMA NF", "CNPJ do emissor legivel", "Nome da marca visivel nos itens", "NF nao cancelada"],
+    "options": [
+      {"emoji": "\u2705", "text": "Ta tudo certo - mesmo assim recusou", "next": "nf_recusada_ok"},
+      {"emoji": "\u274c", "text": "Achei o problema! Vou corrigir", "next": "revendedor_nf"}
+    ]
+  },
+  "nf_recusada_ok": {
+    "question": "NF correta mas recusou? Abra chamado!",
+    "steps": ["Seller Central > Ajuda > Gerenciar ajuda", "Localize o chamado de autorizacao", "Clique para responder", "Anexe NF novamente + explique", "Ou: Ajuda > Obter ajuda > busque autorizacao de marca"],
+    "options": [
+      {"emoji": "\ud83d\udcde", "text": "Falar com meu AM", "next": "falar_am"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "nf_recusada"}
+    ]
+  },
+  "sem_nf": {
+    "question": "Sem NF com 10+ produtos?",
+    "info": "Sem a NF voce NAO consegue autorizacao pra vender essa marca.",
+    "options": [
+      {"emoji": "\ud83d\uded2", "text": "Vou conseguir a NF", "next": "revendedor_nf"},
+      {"emoji": "\u274c", "text": "Listar como generico", "next": "listar_generico"},
+      {"emoji": "\ud83d\udcde", "text": "Falar com meu AM", "next": "falar_am"}
+    ]
+  },
+  "listar_generico": {
+    "question": "Listar produto generico (sem marca)",
+    "steps": ["Seller Central > Catalogo > Adicionar produtos", "Clique 'Estou adicionando produto nao vendido na Amazon'", "Escolha a categoria", "Marca: coloque 'Generico'", "EAN: selecione 'Nao se aplica'", "Preencha titulo, descricao, imagens, preco", "Salve e publique!"],
+    "highlight": "Produto generico pode nao ganhar Buy Box contra produtos com marca. Invista em boas imagens!",
+    "options": [
+      {"emoji": "\u2705", "text": "Listei com sucesso!", "next": "sucesso"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "marca_pergunta"}
+    ]
+  },
+  "listar_generico_ean": {
+    "question": "Listar generico COM EAN",
+    "info": "Tem EAN mas sem marca. O EAN facilita o cadastro!",
+    "steps": ["Seller Central > Catalogo > Adicionar produtos", "Busque pelo EAN", "Se ja existe: VENDER ESTE PRODUTO", "Se nao: crie listing novo", "Marca: coloque 'Generico'", "Preencha titulo, imagens, preco", "Salve!"],
+    "options": [
+      {"emoji": "\u2705", "text": "Listei!", "next": "sucesso"},
+      {"emoji": "\ud83d\udd04", "text": "Deu match", "next": "match_info"}
+    ]
+  },
+  "listar_com_marca": {
+    "question": "Listar produto com marca!",
+    "steps": ["Seller Central > Catalogo > Adicionar produtos", "Busque pelo nome ou EAN", "Se ja existe: VENDER ESTE PRODUTO", "Se nao: crie listing novo", "Preencha marca (nome exato)", "Complete: titulo, bullets, descricao, imagens, preco", "Salve e publique!"],
+    "info": "Com Brand Registry voce tem controle total e pode usar A+ Content!",
+    "options": [
+      {"emoji": "\u2705", "text": "Listei!", "next": "sucesso"},
+      {"emoji": "\ud83d\udea8", "text": "Deu erro", "next": "erros_listagem"},
+      {"emoji": "\ud83d\udd04", "text": "Deu match", "next": "match_info"}
+    ]
+  },
+  "match_info": {
+    "question": "Deu Match! Produto ja existe.",
+    "info": "Quando busca por EAN e ja existe, voce entra na **Buy Box** concorrendo com outros.",
+    "highlight": "Isso e BOM! Aproveita avaliacoes e trafego existente.",
+    "steps": ["Clique 'Vender este produto'", "Defina SEU preco", "Condicao: Novo", "Estoque/quantidade", "Metodo de envio (FBA ou DBA)", "Salve!"],
+    "options": [
+      {"emoji": "\u2705", "text": "Fiz o match!", "next": "sucesso"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "tem_ean"}
+    ]
+  },
+  "erros_listagem": {
+    "question": "Deu erro? Vamos resolver!",
+    "options": [
+      {"emoji": "\ud83d\udd12", "text": "Pediu autorizacao de marca", "next": "listar_revendedor"},
+      {"emoji": "\ud83d\udeab", "text": "Categoria restrita", "next": "restritas"},
+      {"emoji": "\u274c", "text": "EAN conflito", "next": "ean_conflito"},
+      {"emoji": "\ud83d\udccb", "text": "Erro de campos/atributos", "next": "erro_atributos"},
+      {"emoji": "\ud83d\udcde", "text": "Outro erro - Falar com AM", "next": "falar_am"}
+    ]
+  },
+  "ean_conflito": {
+    "question": "EAN em conflito!",
+    "info": "EAN ja cadastrado com outra marca/produto. Pode ser:\\n- Fabricante cadastrou diferente\\n- Outro seller listou errado\\n- EAN duplicado",
+    "options": [
+      {"emoji": "\ud83d\udd04", "text": "Listar sem EAN", "next": "listar_generico"},
+      {"emoji": "\ud83d\udcde", "text": "Falar com AM", "next": "falar_am"}
+    ]
+  },
+  "erro_atributos": {
+    "question": "Erro de campos/atributos",
+    "checklist": ["Titulo muito longo (max 200 chars)", "Falta imagem principal", "Categoria errada", "Campos obrigatorios vazios", "Preco formato errado"],
+    "steps": ["Revise campos em vermelho", "Preencha todos obrigatorios (*)", "Confira categoria", "Salve como rascunho e tente de novo"],
+    "options": [
+      {"emoji": "\u2705", "text": "Corrigi! Sucesso!", "next": "sucesso"},
+      {"emoji": "\ud83d\udcde", "text": "Nao resolvi - Falar AM", "next": "falar_am"}
+    ]
+  },
+  "sucesso": {
+    "question": "Parabens! Produto listado! \ud83c\udf89",
+    "success": "Seu produto esta na Amazon! Pode levar ate 15 min pra aparecer na busca.",
+    "info": "Proximos passos pra vender mais:",
+    "options": [
+      {"emoji": "\u2b50", "text": "Melhorar qualidade do anuncio", "next": "catalogo"},
+      {"emoji": "\ud83d\udce2", "text": "Criar anuncio (Ads)", "next": "ads"},
+      {"emoji": "\ud83c\udff7\ufe0f", "text": "Criar promocao/cupom", "next": "promocoes"},
+      {"emoji": "\ud83d\ude9a", "text": "Configurar envio", "next": "logistica"},
+      {"emoji": "\ud83c\udfe0", "text": "Voltar ao inicio", "next": "inicio"}
+    ]
+  },
+  "falar_am": {
+    "question": "Falar com seu Account Manager",
+    "info": "Se tem AM, entre em contato direto.\\nSe nao tem: **Seller Central > Ajuda > Obter ajuda**",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Abrir chamado Seller Central", "link": "https://sellercentral.amazon.com.br/help/hub"},
+      {"emoji": "\ud83c\udfe0", "text": "Voltar ao inicio", "next": "inicio"}
+    ]
+  }
+}
