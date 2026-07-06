@@ -1,0 +1,219 @@
+
+import json
+import os
+
+flow = {}
+
+# INICIO - TELA 1
+flow["start"] = {"question":"Ola! Sou seu AM de Bolso.","subtitle":"Vou te guiar pra listar seus produtos na Amazon. Vamos la?","options":[{"emoji":"📦","text":"Listar poucos (1 a 5 produtos)","next":"manual_novo_usado"},{"emoji":"🚀","text":"Listar muitos (6+ produtos)","next":"massivo_menu"}]}
+
+# MANUAL - NOVO OU USADO
+flow["manual_novo_usado"] = {"question":"Seu produto e novo ou usado?","options":[{"emoji":"🆕","text":"Novo","next":"manual_ean"},{"emoji":"♻️","text":"Usado / Seminovo","next":"seminovo"}]}
+
+flow["seminovo"] = {"end":True,"question":"Produtos usados vao pelo Amazon Seminovos.","subtitle":"Programa separado. Voce se candidata e a Amazon avalia.","steps":["Ter conta ativa no Seller Central.","Candidatar-se ao Amazon Seminovos.","Aguardar analise (ate 10 dias).","Se aprovado, usar ferramenta de ASIN Seminovo.","Minimo 5% desconto vs. novo."],"options":[{"emoji":"🔗","text":"Ir para Amazon Seminovos","url":"https://venda.amazon.com.br/seminovos","style":"link"},{"emoji":"🏠","text":"Voltar ao inicio","next":"start"}]}
+
+# EAN
+flow["manual_ean"] = {"question":"Seu produto tem codigo de barras (EAN)?","subtitle":"Numero embaixo das barrinhas na embalagem.","options":[{"emoji":"✅","text":"Sim, tenho EAN","next":"gs1_validacao"},{"emoji":"❌","text":"Nao tenho EAN","next":"marca_pergunta"},{"emoji":"🤷","text":"Nao sei o que e EAN","next":"ean_explicacao"}]}
+
+flow["ean_explicacao"] = {"question":"O que e EAN?","info":"Codigo de barras de 13 digitos na embalagem. Ex: 7891234567890. Produtos artesanais geralmente nao tem.","options":[{"emoji":"✅","text":"Tenho EAN sim","next":"gs1_validacao"},{"emoji":"❌","text":"Nao tenho EAN","next":"marca_pergunta"}]}
+
+flow["gs1_validacao"] = {"question":"Valida seu EAN antes de listar!","subtitle":"Evita 90% dos erros.","steps":["Abre Verified by GS1 (link abaixo).","Digita o EAN.","Pesquisa.","Apareceu info = valido.","Nao encontrou = invalido."],"options":[{"emoji":"✅","text":"Validei! Esta OK","next":"marca_pergunta"},{"emoji":"❌","text":"Deu erro / Nao encontrou","next":"ean_invalido"},{"emoji":"🤷","text":"Nao consegui","next":"gs1_tutorial"},{"emoji":"🔗","text":"Abrir site GS1","url":"https://www.gs1.org/services/verified-by-gs1/results","style":"link"}]}
+
+flow["gs1_tutorial"] = {"question":"Passo a passo GS1:","steps":["Abre: gs1.org/services/verified-by-gs1/results","Digita os 13 numeros sem espaco.","Clica na lupa.","Apareceu = valido. Nao = invalido."],"options":[{"emoji":"✅","text":"EAN valido!","next":"marca_pergunta"},{"emoji":"❌","text":"Nao encontrou","next":"ean_invalido"}]}
+
+flow["ean_invalido"] = {"question":"EAN nao valido no GS1.","info":"Causas: digitou errado, EAN de outro pais, ou falso.","options":[{"emoji":"🔢","text":"Conferir e tentar de novo","next":"gs1_validacao"},{"emoji":"📞","text":"Pedir outro ao fornecedor","next":"ean_fornecedor"},{"emoji":"❌","text":"Listar sem EAN","next":"marca_pergunta"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["ean_fornecedor"] = {"question":"Pede EAN valido pro fornecedor.","info":"Dica: pede certificado GS1 junto.","options":[{"emoji":"✅","text":"Tenho novo EAN","next":"gs1_validacao"},{"emoji":"❌","text":"Fornecedor nao tem","next":"marca_pergunta"},{"emoji":"🏠","text":"Voltar ao inicio","next":"start"}]}
+
+# MARCA
+flow["marca_pergunta"] = {"question":"Tem marca ou logo no produto/embalagem?","warning":"IMPRESSO, GRAVADO ou ESTAMPADO. Adesivo/costurado NAO conta.","options":[{"emoji":"✅","text":"Sim, tem marca","next":"tipo_marca"},{"emoji":"❌","text":"Nao tem marca","next":"caminho_a_inicio"},{"emoji":"🤷","text":"So adesivo/costurado","next":"marca_adesivo"}]}
+
+flow["marca_adesivo"] = {"question":"Adesivo/costurado nao conta pra Amazon.","info":"Vai como generico. Muita gente vende generico com sucesso!","options":[{"emoji":"➡️","text":"Listar como generico","next":"caminho_a_inicio"},{"emoji":"🏠","text":"Voltar ao inicio","next":"start"}]}
+
+flow["tipo_marca"] = {"question":"A marca e SUA ou REVENDE?","options":[{"emoji":"🏷️","text":"MINHA marca","next":"caminho_b_inpi"},{"emoji":"🛒","text":"REVENDO marca de terceiro","next":"caminho_c_nf"}]}
+
+# CAMINHO A - GENERICO
+flow["caminho_a_inicio"] = {"question":"Produto generico. Vamos listar!","subtitle":"Sem burocracia de marca.","steps":["Abre Seller Central.","Catalogo - Adicionar Produtos.","Tica: Este produto nao tem uma marca.","Tica: Este produto nao tem uma ID do produto."],"warning":"Mesmo com EAN, pra generico suba SEM EAN.","options":[{"emoji":"✅","text":"Fiz! Cheguei na tela","next":"caminho_a_atributos"},{"emoji":"❌","text":"Nao achei","next":"caminho_a_nav"},{"emoji":"⚠️","text":"Deu erro","next":"troubleshooting_menu"}]}
+
+flow["caminho_a_nav"] = {"question":"Como chegar:","steps":["sellercentral.amazon.com.br","Menu - Catalogo.","Adicionar Produtos.","Quero criar produto nao esta no catalogo.","Clica nesse link."],"options":[{"emoji":"✅","text":"Consegui!","next":"caminho_a_atributos"},{"emoji":"❌","text":"Nao achei","next":"caminho_a_video"}]}
+
+flow["caminho_a_video"] = {"question":"Assiste esse video:","options":[{"emoji":"▶️","text":"Tutorial YouTube","url":"https://www.youtube.com/watch?v=abWArlfRUFc&t=4s","style":"link"},{"emoji":"✅","text":"Cheguei la","next":"caminho_a_atributos"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["caminho_a_atributos"] = {"question":"DICA! Clica em Atributos Obrigatorios.","info":"3 abas: OBRIGATORIO / RECOMENDADO / TODOS. Preenche SO obrigatorio.","options":[{"emoji":"✅","text":"Cliquei! Vejo os obrigatorios","next":"campo_nome"},{"emoji":"🤷","text":"Nao achei","next":"campo_nome"}]}
+
+# CAMPOS OBRIGATORIOS
+flow["campo_nome"] = {"question":"1. Nome do Produto (Titulo)","info":"Marca + tipo + tamanho + quantidade + cor.","warning":"NAO: promocoes, caracteres especiais, CAPS LOCK.","options":[{"emoji":"✅","text":"Preencheu! Proximo","next":"campo_imagem"}]}
+
+flow["campo_imagem"] = {"question":"2. Imagem (obrigatoria)","info":"Fundo branco, 1000x1000px, produto 85%, sem texto.","options":[{"emoji":"✅","text":"Coloquei foto! Proximo","next":"campo_preco"},{"emoji":"📸","text":"Nao tenho fundo branco","next":"foto_ajuda"}]}
+
+flow["foto_ajuda"] = {"question":"Sem fundo branco?","list":["Foto em folha/parede branca.","App: Remove.bg, Canva, PhotoRoom.","Foto de outro marketplace."],"options":[{"emoji":"✅","text":"Resolvi!","next":"campo_preco"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["campo_preco"] = {"question":"3. Preco (R$)","info":"Custo + frete + comissao Amazon (8-15%).","warning":"NAO preco zerado ou absurdo.","options":[{"emoji":"✅","text":"Coloquei! Proximo","next":"campo_quantidade"}]}
+
+flow["campo_quantidade"] = {"question":"4. Quantidade (estoque)","info":"Quantidade REAL em maos. Pode alterar depois.","options":[{"emoji":"✅","text":"Coloquei! Proximo","next":"campo_envio"}]}
+
+flow["campo_envio"] = {"question":"5. Forma de envio","list":["DBA: VOCE embala e envia.","FBA: Amazon entrega. Selo Prime."],"warning":"Primeira vez? Comece com DBA.","options":[{"emoji":"📦","text":"DBA (eu envio)","next":"campo_condicao"},{"emoji":"🚀","text":"FBA (Amazon envia)","next":"campo_condicao"}]}
+
+flow["campo_condicao"] = {"question":"6. Condicao: Novo","options":[{"emoji":"✅","text":"Selecionei! Proximo","next":"variacao_pergunta"}]}
+
+# VARIACOES
+flow["variacao_pergunta"] = {"question":"Tem variacoes? (cor, tamanho, sabor)","options":[{"emoji":"✅","text":"Sim, tem variacao","next":"variacao_ean"},{"emoji":"📦","text":"E um kit/combo","next":"kit_detalhe"},{"emoji":"❌","text":"Produto simples","next":"categoria_restrita"}]}
+
+flow["variacao_ean"] = {"question":"Cada variacao tem EAN proprio?","options":[{"emoji":"✅","text":"Sim, EAN diferente cada","next":"variacao_com_ean"},{"emoji":"❌","text":"Nao, so 1 ou nenhum","next":"variacao_sem_ean"}]}
+
+flow["variacao_com_ean"] = {"question":"Lista cada variacao com EAN.","steps":["Aba Variacoes - tipo.","Adiciona opcoes.","EAN de cada.","Preco e quantidade cada."],"options":[{"emoji":"✅","text":"Fiz!","next":"categoria_restrita"},{"emoji":"❌","text":"Deu erro","next":"troubleshooting_menu"}]}
+
+flow["variacao_sem_ean"] = {"question":"Sem EAN por variacao:","steps":["Lista produto PAI.","Adiciona variacoes como filhos.","Tipo + opcoes.","Preco e quantidade cada."],"options":[{"emoji":"✅","text":"Fiz!","next":"categoria_restrita"},{"emoji":"❌","text":"Deu erro","next":"troubleshooting_menu"}]}
+
+# KIT
+flow["kit_detalhe"] = {"question":"KIT - Atencao!","warning":"PRECO = SOMA dos itens. NAO unitario.","steps":["Pesquisa se EAN ja listado individual.","NAO listado: usa pro kit.","JA listado: outro EAN ou sem EAN."],"options":[{"emoji":"✅","text":"Entendi! Listar kit","next":"categoria_restrita"},{"emoji":"🤷","text":"Nao sei se EAN listado","next":"kit_verificar"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["kit_verificar"] = {"question":"Verificar EAN:","steps":["Abre amazon.com.br","Digita EAN na busca.","Apareceu? = JA LISTADO.","Nao? = Limpo, pode usar."],"options":[{"emoji":"✅","text":"Limpo - usar","next":"categoria_restrita"},{"emoji":"❌","text":"Ja listado - usar outro","next":"categoria_restrita"}]}
+
+# CATEGORIAS RESTRITAS
+flow["categoria_restrita"] = {"question":"Categoria restrita?","info":"Suplementos, cosmeticos, bluetooth/wifi, brinquedos, bateria litio.","options":[{"emoji":"💊","text":"Suplemento/cosmetico","next":"restrita_anvisa"},{"emoji":"📱","text":"Eletronico bluetooth/wifi","next":"restrita_anatel"},{"emoji":"🧸","text":"Brinquedo/eletrodomestico","next":"restrita_inmetro"},{"emoji":"🔋","text":"Bateria litio/quimico","next":"restrita_sds"},{"emoji":"❌","text":"Nao e restrito","next":"salvar"}]}
+
+flow["restrita_anvisa"] = {"question":"Tem ANVISA?","options":[{"emoji":"✅","text":"Sim","next":"restrita_upload"},{"emoji":"❌","text":"Nao tenho","next":"restrita_sem_doc"},{"emoji":"🤷","text":"Nao sei se precisa","next":"restrita_check_anvisa"}]}
+
+flow["restrita_check_anvisa"] = {"question":"Precisa ANVISA se:","info":"Ingerido, aplicado no corpo, cosmetico, perfume.","options":[{"emoji":"✅","text":"Precisa - tenho","next":"restrita_upload"},{"emoji":"❌","text":"Precisa - nao tenho","next":"restrita_sem_doc"},{"emoji":"➡️","text":"Nao precisa","next":"salvar"}]}
+
+flow["restrita_anatel"] = {"question":"Anatel - sem fio:","list":["Celulares","Fones bluetooth","Caixas som BT","Roteadores","Smartwatches"],"options":[{"emoji":"✅","text":"Tenho Anatel","next":"restrita_upload"},{"emoji":"❌","text":"Nao tenho","next":"restrita_sem_doc"},{"emoji":"🤷","text":"Nao tem BT/wifi","next":"restrita_sem_bt"}]}
+
+flow["restrita_sem_bt"] = {"question":"Sem bluetooth/wifi geralmente nao precisa Anatel.","options":[{"emoji":"✅","text":"Seguir sem doc","next":"salvar"},{"emoji":"🤷","text":"Precisa INMETRO?","next":"restrita_inmetro"}]}
+
+flow["restrita_inmetro"] = {"question":"Tem INMETRO?","list":["Brinquedos (TODOS)","Eletrodomesticos","Equipamentos eletricos","Capacetes","Cadeirinhas","Panelas pressao"],"options":[{"emoji":"✅","text":"Tenho","next":"restrita_upload"},{"emoji":"❌","text":"Nao tenho","next":"restrita_sem_doc"},{"emoji":"➡️","text":"Nao precisa","next":"salvar"}]}
+
+flow["restrita_sds"] = {"question":"Bateria/quimico precisa SDS.","list":["Bateria litio","Quimicos","Limpeza","Aerossois"],"info":"SDS vem do FABRICANTE.","options":[{"emoji":"✅","text":"Tenho","next":"restrita_upload"},{"emoji":"❌","text":"Nao tenho","next":"restrita_sem_doc"},{"emoji":"🤷","text":"Nao sei se perigoso","next":"restrita_check_perigoso"}]}
+
+flow["restrita_check_perigoso"] = {"question":"E perigoso se:","info":"Bateria litio, inflamavel, aerossol, corrosivo.","options":[{"emoji":"✅","text":"E perigoso","next":"restrita_sem_doc"},{"emoji":"❌","text":"Nao e","next":"salvar"}]}
+
+flow["restrita_upload"] = {"question":"Upload da documentacao:","steps":["Seller Central: Gerenciar produtos perigosos.","Upload PDF/JPG/PNG.","Aguarda analise.","Aprovado = lista."],"options":[{"emoji":"✅","text":"Aprovaram!","next":"salvar"},{"emoji":"⏳","text":"Aguardando","next":"restrita_aguardando"},{"emoji":"❌","text":"Nao achei upload","next":"restrita_upload_ajuda"}]}
+
+flow["restrita_aguardando"] = {"question":"Amazon vai analisar.","info":"Liste outros enquanto espera!","options":[{"emoji":"📦","text":"Listar outro","next":"start"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["restrita_upload_ajuda"] = {"question":"Onde upload:","steps":["Menu - Estoque.","Gerenciar classificacao produtos perigosos.","Ou busca: produtos perigosos."],"options":[{"emoji":"✅","text":"Achei!","next":"salvar"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["restrita_sem_doc"] = {"question":"Sem doc, nao da pra listar esse.","list":["Providencie (peca ao fabricante).","Liste OUTROS produtos.","Listing Hub ajuda."],"options":[{"emoji":"📦","text":"Listar outro","next":"start"},{"emoji":"📋","text":"Listing Hub","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+# SALVAR
+flow["salvar"] = {"question":"Clica em Salvar e finalizar!","options":[{"emoji":"✅","text":"LISTOU!","next":"sucesso","style":"success"},{"emoji":"❌","text":"Deu erro","next":"troubleshooting_menu"}]}
+
+flow["sucesso"] = {"end":True,"question":"PARABENS! Produto na Amazon!","info":"Proximos: frete, Ads, mais fotos.","options":[{"emoji":"📦","text":"Listar outro","next":"start"},{"emoji":"🚀","text":"Anunciar (Ads)","url":"https://advertising.amazon.com.br","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+# CAMINHO B - MARCA PROPRIA
+flow["caminho_b_inpi"] = {"question":"Tem registro no INPI?","subtitle":"INPI = Instituto Nacional de Propriedade Industrial.","options":[{"emoji":"✅","text":"INPI aprovado","next":"b_brand_registry"},{"emoji":"⏳","text":"INPI em processo","next":"b_brand_registry"},{"emoji":"❌","text":"Nao tenho INPI","next":"b_sem_inpi"},{"emoji":"🤷","text":"O que e INPI?","next":"b_explicacao_inpi"}]}
+
+flow["b_explicacao_inpi"] = {"question":"INPI:","info":"Orgao do governo que registra marcas. 6-12 meses. Com protocolo ja usa na Amazon.","options":[{"emoji":"✅","text":"Tenho INPI/protocolo","next":"b_brand_registry"},{"emoji":"❌","text":"Nao tenho","next":"b_sem_inpi"}]}
+
+flow["b_brand_registry"] = {"question":"Marca no Brand Registry da Amazon?","info":"Controle total, protecao, ferramentas exclusivas.","options":[{"emoji":"✅","text":"Sim tenho","next":"b_listar_marca"},{"emoji":"❌","text":"Nao cadastrei","next":"b_registrar"},{"emoji":"🤷","text":"O que e?","next":"b_explicacao_brand"}]}
+
+flow["b_explicacao_brand"] = {"question":"Brand Registry:","info":"Cadastro da marca DENTRO da Amazon. Controle total.","options":[{"emoji":"✅","text":"Ja tenho","next":"b_listar_marca"},{"emoji":"❌","text":"Quero cadastrar","next":"b_registrar"},{"emoji":"📦","text":"Listar logo, Brand depois","next":"b_sem_brand"}]}
+
+flow["b_sem_inpi"] = {"question":"Sem INPI, tenta com fotos.","info":"Envie fotos da marca no produto. Pode aceitar ou recusar.","options":[{"emoji":"✅","text":"Tenho fotos","next":"b_listar_marca"},{"emoji":"📦","text":"Listar generico","next":"caminho_a_inicio"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["b_registrar"] = {"question":"Registrar no Brand Registry!","steps":["Acessa portal Brand Registry.","Login Amazon.","Nome da marca + INPI.","Imagens.","Aguarda (ate 21 dias)."],"options":[{"emoji":"🔗","text":"Abrir Brand Registry","url":"https://venda.amazon.com.br/brand-registry","style":"link"},{"emoji":"📦","text":"Generico enquanto espera","next":"b_sem_brand"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["b_listar_marca"] = {"question":"Listar com sua marca!","steps":["Catalogo - Adicionar Produtos.","Criar novo produto.","Campo Marca: sua marca.","Atributos Obrigatorios."],"info":"Tem EAN? Coloca. Nao? Isencao GTIN.","options":[{"emoji":"✅","text":"Cheguei nos atributos","next":"campo_nome"},{"emoji":"📦","text":"Kit da minha marca","next":"b_kit"},{"emoji":"❌","text":"Deu erro","next":"troubleshooting_menu"}]}
+
+flow["b_kit"] = {"question":"Kit sua marca - tem EAN?","warning":"PRECO = SOMA dos itens.","options":[{"emoji":"✅","text":"Tenho EAN do kit","next":"categoria_restrita"},{"emoji":"❌","text":"Nao - envio fotos","next":"categoria_restrita"}]}
+
+flow["b_sem_brand"] = {"question":"Listar generico enquanto Brand sai.","info":"Quando aprovar, reivindica listagens.","options":[{"emoji":"➡️","text":"Listar generico","next":"caminho_a_inicio"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+# CAMINHO C - REVENDEDOR
+flow["caminho_c_nf"] = {"question":"Tem NF com 10+ produtos da marca na MESMA nota?","warning":"10+ na MESMA NF. NAO junta notas.","options":[{"emoji":"✅","text":"Sim, tenho","next":"c_buscar"},{"emoji":"❌","text":"Nao tenho","next":"c_sem_nf"},{"emoji":"🤷","text":"Menos de 10","next":"c_insuficiente"}]}
+
+flow["c_sem_nf"] = {"question":"Sem NF 10+, nao lista como revendedor.","list":["Compre 10+ de uma vez.","Fabricante/distribuidor/atacadista.","Volta quando tiver!"],"options":[{"emoji":"📦","text":"Listar outro","next":"start"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["c_insuficiente"] = {"question":"Menos de 10 nao aceita.","info":"Proxima compra, pede 10+ numa nota so.","options":[{"emoji":"📦","text":"Listar outro","next":"start"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["c_buscar"] = {"question":"Buscar no Seller Central:","steps":["Catalogo - Adicionar Produtos.","Digita EAN ou nome.","Ve resultado."],"options":[{"emoji":"🟢","text":"Achou! Ja existe","next":"c_match"},{"emoji":"🟡","text":"Nao achou","next":"c_criar"},{"emoji":"🔴","text":"Erro/autorizacao","next":"c_autorizacao"},{"emoji":"🤷","text":"Nao sei se e o mesmo","next":"c_verificar"}]}
+
+flow["c_match"] = {"question":"Existe! Vincular oferta.","steps":["Vender este produto.","Preco, quantidade, envio.","Condicao: Novo.","Salva."],"options":[{"emoji":"✅","text":"Listou!","next":"sucesso","style":"success"},{"emoji":"🔒","text":"Pediu autorizacao","next":"c_autorizacao"},{"emoji":"🏷️","text":"Marca errada","next":"conflito_marca"},{"emoji":"❌","text":"Outro erro","next":"troubleshooting_menu"}]}
+
+flow["c_verificar"] = {"question":"EAN identico + marca bate = mesmo.","options":[{"emoji":"✅","text":"E o mesmo","next":"c_match"},{"emoji":"❌","text":"Diferente","next":"c_criar"}]}
+
+flow["c_criar"] = {"question":"Nao existe. Criar!","steps":["Produto nao vendido na Amazon.","Categoria, marca, EAN, imagem, preco.","Atributos Obrigatorios."],"options":[{"emoji":"✅","text":"Produto simples","next":"categoria_restrita"},{"emoji":"📦","text":"Kit marca consolidada","next":"kit_detalhe"},{"emoji":"❌","text":"Deu erro","next":"troubleshooting_menu"}]}
+
+flow["c_autorizacao"] = {"question":"Amazon precisa autorizar.","steps":["Abre chamado (Ajuda - Obter Ajuda).","Anexa NF.","Aguarda."],"warning":"NF: ate 180 dias, nome igual, 10+ unidades.","options":[{"emoji":"✅","text":"Aprovaram!","next":"sucesso","style":"success"},{"emoji":"❌","text":"Recusaram","next":"c_recusa"},{"emoji":"⏳","text":"Esperando","next":"c_aguardando"}]}
+
+flow["c_recusa"] = {"question":"Recusaram? Checklist:","list":["NF ate 180 dias?","Nome igual Seller Central?","10+ na mesma nota?","Fabricante na nota?"],"options":[{"emoji":"✅","text":"Corrigi, reenviei","next":"c_aguardando"},{"emoji":"❌","text":"Tudo certo, recusou","next":"c_chamado"}]}
+
+flow["c_chamado"] = {"question":"Localizar chamado:","steps":["Ajuda - Gerenciar Ajuda - Autorizacao Marca.","Motivo - Responder.","Nao achou? Ajuda - Obter Ajuda.","Travado? Fala com AM."],"options":[{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"💬","text":"Falar com AM","next":"c_falar_am"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["c_aguardando"] = {"question":"Aguardando.","info":"Pode levar dias. Liste outros!","options":[{"emoji":"📦","text":"Listar outro","next":"start"},{"emoji":"💬","text":"Falar com AM","next":"c_falar_am"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["c_falar_am"] = {"question":"Fala com seu AM.","info":"Nao tem? Usa Lista pra mim.","options":[{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+# CONFLITO MARCA
+flow["conflito_marca"] = {"question":"Marca X aparece como Y?","options":[{"emoji":"✅","text":"Sou dono + Brand Registry","next":"conflito_dono"},{"emoji":"❌","text":"Nao sou dono","next":"conflito_nao_dono"}]}
+
+flow["conflito_dono"] = {"question":"Dono + Brand: corrige direto!","steps":["Brand Registry - Denunciar violacao.","Ou edita pagina.","Nao consegue? Chamado como Brand Owner."],"options":[{"emoji":"✅","text":"Corrigi!","next":"sucesso"},{"emoji":"❌","text":"Nao consigo","next":"c_falar_am"}]}
+
+flow["conflito_nao_dono"] = {"question":"Sem Brand, abre chamado:","steps":["Ajuda - Obter Ajuda.","Descreve problema.","Aguarda."],"options":[{"emoji":"✅","text":"Abri chamado","next":"c_aguardando"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+# MASSIVO
+flow["massivo_menu"] = {"question":"Listagem em massa! Como tem seus produtos?","options":[{"emoji":"🔗","text":"Tenho integrador (Bling, Tiny)","next":"massivo_integrador"},{"emoji":"🛒","text":"Vendo em outro marketplace","next":"massivo_mkt"},{"emoji":"🆕","text":"Primeiro canal online","next":"massivo_primeiro"}]}
+
+flow["massivo_integrador"] = {"question":"Qual integrador?","options":[{"emoji":"📊","text":"Bling","next":"massivo_bling"},{"emoji":"📊","text":"Tiny","next":"massivo_tiny"},{"emoji":"📊","text":"Outro","next":"massivo_outro_int"}]}
+
+flow["massivo_bling"] = {"question":"Exportar do Bling:","steps":["Produtos - Listar.","Seleciona.","Exportar (download).","CSV ou Excel.","Manda pro Listing Hub!"],"options":[{"emoji":"✅","text":"Exportei!","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"❌","text":"Nao achei","next":"massivo_outro_int"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["massivo_tiny"] = {"question":"Exportar do Tiny:","steps":["Produtos - Todos.","Seleciona.","Exportar.","CSV.","Manda pro Listing Hub!"],"options":[{"emoji":"✅","text":"Exportei!","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"❌","text":"Nao achei","next":"massivo_outro_int"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["massivo_outro_int"] = {"question":"Qualquer integrador:","steps":["Area Produtos/Catalogo.","Seleciona.","Exportar/Download.","CSV ou Excel.","Manda pro Listing Hub!"],"options":[{"emoji":"✅","text":"Exportei!","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"📋","text":"Nao consigo","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["massivo_mkt"] = {"question":"Qual marketplace?","options":[{"emoji":"🟡","text":"Mercado Livre","next":"massivo_ml"},{"emoji":"🟠","text":"Shopee","next":"massivo_shopee"},{"emoji":"📊","text":"Outro","next":"massivo_outro_mkt"}]}
+
+flow["massivo_ml"] = {"question":"Exportar do ML:","steps":["Publicacoes - Ativas.","Baixar Publicacoes/Exportar.","Menu 3 pontos - Exportar.","Manda pro Listing Hub!"],"options":[{"emoji":"✅","text":"Exportei!","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"❌","text":"Nao achei","next":"massivo_outro_mkt"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["massivo_shopee"] = {"question":"Exportar da Shopee:","steps":["Seller Centre.","Meus Produtos.","Exportar em Lote.","Exportar todos.","Manda pro Listing Hub!"],"options":[{"emoji":"✅","text":"Exportei!","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"❌","text":"Nao achei","next":"massivo_outro_mkt"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["massivo_outro_mkt"] = {"question":"Qualquer marketplace:","steps":["Painel vendedor.","Meus Produtos/Anuncios.","Exportar/Download.","Manda pro Listing Hub!"],"options":[{"emoji":"✅","text":"Tenho arquivo!","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"📋","text":"Nao consigo","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["massivo_primeiro"] = {"question":"Primeiro canal!","info":"Foto no Google Drive + Listing Hub.","options":[{"emoji":"📸","text":"Tenho fotos","next":"massivo_drive"},{"emoji":"📋","text":"Listem pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["massivo_drive"] = {"question":"Google Drive:","steps":["Abre Google Drive.","Cria pasta Produtos Amazon.","Sobe fotos.","Cada foto: Compartilhar - Qualquer pessoa com link.","Copia link.","Anota: nome, preco, link.","Manda pro Listing Hub."],"options":[{"emoji":"✅","text":"Organizei!","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+# TROUBLESHOOTING
+flow["troubleshooting_menu"] = {"question":"Qual erro?","options":[{"emoji":"🔒","text":"Autorizacao marca","next":"c_autorizacao"},{"emoji":"🔢","text":"Erro EAN","next":"erro_ean"},{"emoji":"🏷️","text":"Marca nao registrada (5665)","next":"erro_bna"},{"emoji":"🚫","text":"Categoria restrita (6024/6039)","next":"erro_gating"},{"emoji":"📝","text":"Atributo invalido (8560/99001)","next":"erro_atributo"},{"emoji":"🔄","text":"Outro","next":"troubleshooting_2"}]}
+
+flow["troubleshooting_2"] = {"question":"Outros erros:","options":[{"emoji":"⏳","text":"Sistema lento (8571)","next":"erro_throttle"},{"emoji":"🔐","text":"GTIN Authority (8572)","next":"erro_gtin"},{"emoji":"☠️","text":"Produto morto","next":"erro_tombstoned"},{"emoji":"❓","text":"Outro","next":"erro_generico"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["erro_ean"] = {"question":"Erro EAN:","options":[{"emoji":"⚠️","text":"Ja usado por outro","next":"erro_ean_usado"},{"emoji":"🔢","text":"Invalido","next":"erro_ean_invalido"},{"emoji":"🔀","text":"Puxou errado","next":"erro_ean_conflito"}]}
+
+flow["erro_ean_usado"] = {"question":"EAN usado = produto existe. VINCULE.","steps":["Busca pelo EAN.","Vender este produto.","Preco, quantidade, envio.","Salva."],"options":[{"emoji":"✅","text":"Vinculei!","next":"sucesso"},{"emoji":"🔒","text":"Pediu autorizacao","next":"c_autorizacao"},{"emoji":"❌","text":"Produto diferente","next":"erro_ean_conflito"}]}
+
+flow["erro_ean_invalido"] = {"question":"EAN invalido.","steps":["Confere 13 digitos.","Valida GS1.","Falso? Pede outro.","Sem solucao? Lista sem EAN."],"options":[{"emoji":"🔢","text":"Validar GS1","next":"gs1_validacao"},{"emoji":"❌","text":"Sem EAN","next":"marca_pergunta"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["erro_ean_conflito"] = {"question":"EAN puxou errado.","steps":["Use outro EAN.","Ou sem EAN.","Ou vincule + chamado."],"options":[{"emoji":"✅","text":"Outro EAN","next":"categoria_restrita"},{"emoji":"❌","text":"Sem EAN","next":"marca_pergunta"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["erro_bna"] = {"question":"Erro 5665: Marca nao registrada.","steps":["Confere grafia exata.","Sua? Brand Registry.","Terceiro? Busca EAN.","Nada? Generico."],"options":[{"emoji":"🏷️","text":"Minha - Brand Registry","next":"b_registrar"},{"emoji":"🔍","text":"Terceiro - buscar EAN","next":"c_buscar"},{"emoji":"📦","text":"Generico","next":"caminho_a_inicio"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["erro_gating"] = {"question":"Erro 6024/6039: Restrita.","options":[{"emoji":"💊","text":"ANVISA","next":"restrita_anvisa"},{"emoji":"📱","text":"Anatel","next":"restrita_anatel"},{"emoji":"🧸","text":"INMETRO","next":"restrita_inmetro"},{"emoji":"🔋","text":"SDS","next":"restrita_sds"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["erro_atributo"] = {"question":"Erro 8560/99001: Campo errado.","steps":["Le mensagem - diz qual campo.","Faltou obrigatorio?","Comum: vazio, valor errado.","Corrige e salva."],"options":[{"emoji":"✅","text":"Corrigi!","next":"salvar"},{"emoji":"❌","text":"Nao entendi","next":"erro_generico"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["erro_throttle"] = {"question":"Erro 8571: Lento. Temporario!","steps":["Espera 15-30 min.","Tenta de novo.","Outro horario.","24h+? Chamado."],"options":[{"emoji":"⏳","text":"Vou esperar","next":"start"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["erro_gtin"] = {"question":"Erro 8572: EAN de outra empresa.","steps":["Busca pelo EAN.","Existe? Vincular.","Nao fabricante? Sem EAN.","Fabricante? Chamado + GS1."],"options":[{"emoji":"🔍","text":"Buscar vincular","next":"c_buscar"},{"emoji":"❌","text":"Sem EAN","next":"marca_pergunta"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"}]}
+
+flow["erro_tombstoned"] = {"question":"Produto morto. Nao reativa.","steps":["NAO liste no mesmo ASIN.","Crie NOVO.","Use EAN.","Erro? Chamado."],"options":[{"emoji":"🆕","text":"Criar novo","next":"manual_ean"},{"emoji":"📋","text":"Lista pra mim","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+flow["erro_generico"] = {"question":"Erro desconhecido:","steps":["Print da tela.","Limpa cache.","Outro navegador (Chrome).","Chamado.","Ou Listing Hub."],"options":[{"emoji":"🔄","text":"Cache limpo, tentar","next":"salvar"},{"emoji":"📋","text":"Listing Hub","url":"https://amazonexteu.qualtrics.com/jfe/form/SV_eEhccc2rqm5WURw","style":"link"},{"emoji":"💬","text":"Falar com AM","next":"c_falar_am"},{"emoji":"🏠","text":"Inicio","next":"start"}]}
+
+# Alias home -> start
+flow["home"] = flow["start"]
+
+# SALVAR ARQUIVO
+os.makedirs("data", exist_ok=True)
+with open("data/flow.json", "w", encoding="utf-8") as f:
+    json.dump(flow, f, ensure_ascii=False, indent=2)
+
+# VALIDAR
+with open("data/flow.json", "r", encoding="utf-8") as f:
+    test = json.load(f)
+
+print(f"SUCESSO! flow.json criado com {len(test)} telas!")
+print("Agora roda: python -m http.server 8000")
+print("E abre: http://localhost:8000")
+
