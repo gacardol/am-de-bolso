@@ -1,0 +1,105 @@
+{
+  "inicio": {
+    "question": "Qualidade de Catalogo \u2b50",
+    "info": "Um anuncio de qualidade vende mais! Veja como melhorar seus listings e subir no ranking.",
+    "options": [
+      {"emoji": "\ud83d\udcf8", "text": "Imagens (a parte mais importante!)", "next": "imagens"},
+      {"emoji": "\ud83d\udcdd", "text": "Titulo", "next": "titulo"},
+      {"emoji": "\ud83d\udccb", "text": "Bullet Points", "next": "bullets"},
+      {"emoji": "\ud83d\udcc4", "text": "Descricao", "next": "descricao"},
+      {"emoji": "\ud83d\udd11", "text": "Palavras-chave (SEO)", "next": "keywords"},
+      {"emoji": "\ud83c\udf1f", "text": "A+ Content (pagina premium)", "next": "aplus"},
+      {"emoji": "\ud83d\udccb", "text": "Checklist completo de qualidade", "next": "checklist"}
+    ]
+  },
+  "imagens": {
+    "question": "\ud83d\udcf8 Imagens do Produto",
+    "info": "A imagem e o que MAIS vende na Amazon. Produto com boas imagens converte ate 3x mais!",
+    "checklist": ["Imagem principal: fundo BRANCO puro (RGB 255,255,255)", "Produto ocupa 85% ou mais do espaco", "Minimo 1000x1000 pixels (ideal: 2000x2000)", "Sem textos, logos ou marcas d'agua na principal", "6 a 9 imagens no total", "Mostrar o produto de diferentes angulos", "Imagem de uso/lifestyle (produto sendo usado)", "Imagem com dimensoes/escala", "Imagem dos detalhes/close-up"],
+    "warning": "Imagem principal com fundo colorido ou com texto = Amazon pode SUPRIMIR seu anuncio!",
+    "options": [
+      {"emoji": "\ud83d\udca1", "text": "Dicas para fotos com celular", "next": "fotos_celular"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "fotos_celular": {
+    "question": "Dicas para fotos profissionais com celular:",
+    "steps": ["Use luz natural (perto da janela)", "Fundo branco: use cartolina ou lencol branco", "Limpe a lente do celular!", "Nao use flash (luz natural e melhor)", "Tire de varios angulos", "Mostre detalhes importantes (etiqueta, textura)", "Tire uma foto do produto sendo usado", "Edite: aumente brilho e contraste se necessario"],
+    "highlight": "App gratuito pra remover fundo: remove.bg (site) ou app 'PhotoRoom'",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "imagens"}
+    ]
+  },
+  "titulo": {
+    "question": "\ud83d\udcdd Titulo do Produto",
+    "info": "O titulo e o segundo fator mais importante. Precisa ser claro e ter as palavras que o cliente busca.",
+    "checklist": ["Maximo 200 caracteres", "Formato: Marca + Produto + Caracteristica principal + Tamanho/Cor", "Primeira letra de cada palavra maiuscula", "Sem caracteres especiais (!@#$%)", "Sem 'promocao', 'frete gratis' ou termos proibidos", "Inclua palavras que o cliente buscaria"],
+    "highlight": "Exemplo bom: 'Fone de Ouvido JBL Tune 510BT Bluetooth Sem Fio Preto'\\nExemplo ruim: 'FONE BLUETOOTH BARATO PROMOÇÃO!!!'",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "bullets": {
+    "question": "\ud83d\udccb Bullet Points (Caracteristicas)",
+    "info": "Os 5 bullet points aparecem abaixo do titulo. Sao decisivos pra conversao!",
+    "checklist": ["Use os 5 bullets disponiveis", "Cada bullet: 1 beneficio principal", "Comece com a informacao mais importante", "Maximo 200 caracteres por bullet", "Destaque: material, tamanho, uso, diferencial", "Fale beneficios (nao so caracteristicas)"],
+    "highlight": "Dica: Pense 'o que o cliente quer saber antes de comprar?' e responda nos bullets.\\n\\nExemplo:\\n- Ruim: 'Bluetooth 5.0'\\n- Bom: 'Bluetooth 5.0 - Conexao estavel ate 10m de distancia sem interrupcoes'",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "descricao": {
+    "question": "\ud83d\udcc4 Descricao do Produto",
+    "info": "A descricao fica mais abaixo na pagina. E sua chance de contar mais sobre o produto.",
+    "checklist": ["Ate 2000 caracteres", "Conte a historia do produto ou marca", "Repita informacoes importantes dos bullets", "Inclua instrucoes de uso (se aplicavel)", "Mencione garantia ou diferenciais", "Use paragrafos curtos (facil de ler)"],
+    "highlight": "Se voce tem Brand Registry, pode usar **A+ Content** em vez da descricao normal - muito mais bonito e converte mais!",
+    "options": [
+      {"emoji": "\ud83c\udf1f", "text": "O que e A+ Content?", "next": "aplus"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "keywords": {
+    "question": "\ud83d\udd11 Palavras-chave (Search Terms)",
+    "info": "Palavras-chave ajudam seu produto a ser encontrado na busca. Ficam invisiveis pro cliente mas a Amazon usa pra rankear.",
+    "checklist": ["Seller Central > Editar listing > aba 'Keywords'", "Use termos que NAO estao no titulo", "Sinonimos, apelidos, variacoes", "Sem repetir palavras do titulo", "Sem marcas concorrentes!", "Maximo 250 bytes (cerca de 250 caracteres)", "Separe por espacos (nao virgulas)"],
+    "highlight": "Exemplo: Se titulo tem 'Fone Bluetooth'\\nKeywords: 'headphone sem fio auricular wireless headset'",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "aplus": {
+    "question": "\ud83c\udf1f A+ Content (Conteudo Premium)",
+    "info": "O A+ Content substitui a descricao por uma pagina visual bonita com imagens e texto formatado. Aumenta conversao em ate 10%!",
+    "checklist": ["Precisa ter Brand Registry ativo", "Seller Central > Publicidade > A+ Content Manager", "Escolha um template", "Adicione imagens e textos por modulo", "Publique e aguarde aprovacao"],
+    "warning": "Disponivel APENAS para marcas registradas no Brand Registry!",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Como registrar marca (Brand Registry)", "link": "https://brandservices.amazon.com.br"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "checklist": {
+    "question": "Checklist completo de qualidade:",
+    "info": "Seu anuncio esta pronto pra vender? Confira tudo:",
+    "table": {
+      "headers": ["Item", "Status ideal"],
+      "rows": [
+        ["Imagem principal", "Fundo branco, 2000x2000px"],
+        ["Total de imagens", "6 a 9 imagens"],
+        ["Titulo", "Completo, ate 200 chars, com keywords"],
+        ["Bullet points", "5 bullets preenchidos"],
+        ["Descricao", "Preenchida (ou A+ Content)"],
+        ["Keywords", "Preenchidas com sinonimos"],
+        ["Preco", "Competitivo vs concorrencia"],
+        ["Estoque", "Disponivel"],
+        ["Categoria", "Correta"],
+        ["EAN/Marca", "Preenchidos corretamente"]
+      ]
+    },
+    "highlight": "Quanto mais itens marcados = mais chance de vender! Foque primeiro nas imagens e titulo.",
+    "options": [
+      {"emoji": "\ud83d\udcf8", "text": "Melhorar imagens", "next": "imagens"},
+      {"emoji": "\ud83d\udcdd", "text": "Melhorar titulo", "next": "titulo"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  }
+}
