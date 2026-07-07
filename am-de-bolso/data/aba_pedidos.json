@@ -1,0 +1,89 @@
+{
+  "inicio": {
+    "question": "Processar Pedidos \ud83d\udccb",
+    "info": "Vendeu! Agora precisa enviar. Veja como processar seus pedidos dependendo do modelo de envio.",
+    "options": [
+      {"emoji": "\ud83d\udce6", "text": "Sou FBA (Amazon envia)", "next": "fba_pedidos"},
+      {"emoji": "\ud83d\ude9a", "text": "Sou DBA (frete Amazon, eu embalo)", "next": "dba_pedidos"},
+      {"emoji": "\ud83c\udfe0", "text": "Envio proprio (meu frete)", "next": "proprio_pedidos"},
+      {"emoji": "\ud83c\udfac", "text": "Tutorial em video", "next": "video_tutorial"}
+    ]
+  },
+  "fba_pedidos": {
+    "question": "\ud83d\udce6 Pedidos FBA - Amazon faz tudo!",
+    "info": "Se voce usa FBA, **nao precisa fazer nada** quando vende! A Amazon embala e envia automaticamente.",
+    "success": "Relaxa! A Amazon cuida do envio, rastreamento e atendimento pos-venda.",
+    "info": "Voce so precisa:\\n- Monitorar seu estoque\\n- Repor quando estiver acabando\\n- Acompanhar vendas no painel",
+    "steps": ["Seller Central > Pedidos > Gerenciar pedidos", "Veja seus pedidos (status: Enviado pela Amazon)", "Acompanhe no painel de vendas", "Reponha estoque quando necessario"],
+    "options": [
+      {"emoji": "\ud83d\udce6", "text": "Como repor estoque FBA?", "next": "repor_fba"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "repor_fba": {
+    "question": "Como repor estoque FBA:",
+    "steps": ["Seller Central > Estoque > Gerenciar estoque FBA", "Veja quais produtos estao com estoque baixo", "Clique em 'Enviar/Repor estoque'", "Crie uma nova remessa", "Embale conforme instrucoes da Amazon", "Envie pro Centro de Distribuicao", "Acompanhe o recebimento"],
+    "highlight": "Dica: Nao deixe estoque zerar! Configure alertas de estoque baixo.",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "fba_pedidos"}
+    ]
+  },
+  "dba_pedidos": {
+    "question": "\ud83d\ude9a Processar Pedidos DBA",
+    "info": "No DBA, voce embala e a Amazon coleta! Quando vende, precisa preparar o pedido rapidamente.",
+    "steps": ["Seller Central > Pedidos > Gerenciar pedidos", "Veja os pedidos pendentes", "Embale o produto com cuidado", "Imprima a etiqueta de envio (gerada automaticamente)", "Cole a etiqueta no pacote", "Deixe pronto pra coleta no local cadastrado", "Entregador Amazon passa e coleta!"],
+    "warning": "Prepare rapido! Voce tem um prazo pra embalar (geralmente ate o fim do dia ou proximo dia util).",
+    "options": [
+      {"emoji": "\ud83c\udfa5", "text": "Tutorial em video (processar pedido)", "link": "https://www.youtube.com/watch?v=sgptgk7Zvno"},
+      {"emoji": "\ud83d\udccc", "text": "Como imprimir etiqueta?", "next": "etiqueta_dba"},
+      {"emoji": "\ud83d\udce6", "text": "Como embalar?", "next": "embalar_dba"},
+      {"emoji": "\u274c", "text": "Coleta nao aconteceu", "next": "coleta_falhou"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "etiqueta_dba": {
+    "question": "Como imprimir etiqueta DBA:",
+    "steps": ["Seller Central > Pedidos > Gerenciar pedidos", "Encontre o pedido pendente", "Clique em 'Imprimir etiqueta de envio'", "Imprima em folha A4 ou etiqueta adesiva", "Cole no pacote de forma visivel", "Pronto pra coleta!"],
+    "info": "Se nao tem impressora: tente imprimir em grafica rapida ou use o app Seller da Amazon.",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "dba_pedidos"}
+    ]
+  },
+  "embalar_dba": {
+    "question": "Como embalar pedidos DBA:",
+    "checklist": ["Use caixa ou envelope resistente", "Proteja o produto (plastico bolha, papel)", "Nao deixe espaco vazio (produto nao pode se mexer)", "Feche bem com fita adesiva", "Cole a etiqueta por fora (visivel!)", "Nao coloque nada sobre a etiqueta"],
+    "highlight": "Dica: Caixas de papelao ou envelopes de seguranca (aqueles cinza com bolha) funcionam bem!",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "dba_pedidos"}
+    ]
+  },
+  "coleta_falhou": {
+    "question": "Coleta nao aconteceu?",
+    "info": "Se o entregador nao passou pra coletar:",
+    "steps": ["Verifique se o pedido esta com etiqueta impressa", "Confira o endereco de coleta nas configuracoes", "Verifique o horario de coleta cadastrado", "Se persistir: abra chamado no Seller Central"],
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Abrir chamado", "link": "https://sellercentral.amazon.com.br/help/hub"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "dba_pedidos"}
+    ]
+  },
+  "proprio_pedidos": {
+    "question": "\ud83c\udfe0 Processar Pedidos - Envio Proprio",
+    "info": "Voce cuida de tudo: embala e envia pela transportadora/Correios que preferir.",
+    "steps": ["Seller Central > Pedidos > Gerenciar pedidos", "Veja pedidos pendentes", "Embale o produto", "Envie pelos Correios ou transportadora", "IMPORTANTE: Insira o codigo de rastreamento no Seller Central!", "Confirme o envio"],
+    "warning": "SEMPRE insira o rastreamento! Sem rastreamento = risco de penalizacao na conta.",
+    "steps": ["Apos enviar, volte no pedido", "Clique 'Confirmar envio'", "Insira: transportadora + codigo de rastreio", "Salve!"],
+    "options": [
+      {"emoji": "\u2705", "text": "Entendi!", "next": "inicio"},
+      {"emoji": "\ud83d\ude9a", "text": "Quero migrar pra DBA", "next": "logistica"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "video_tutorial": {
+    "question": "\ud83c\udfac Tutoriais em video:",
+    "info": "Aprenda assistindo!",
+    "options": [
+      {"emoji": "\ud83c\udfac", "text": "Como processar pedidos DBA", "link": "https://www.youtube.com/watch?v=sgptgk7Zvno"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  }
+}
