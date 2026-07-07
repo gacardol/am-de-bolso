@@ -1,0 +1,89 @@
+{
+  "inicio": {
+    "question": "Amazon Ads \ud83d\udce2",
+    "info": "Anuncios patrocinados aumentam a visibilidade dos seus produtos. Apareca no topo da busca!",
+    "options": [
+      {"emoji": "\ud83e\udde0", "text": "O que e Amazon Ads?", "next": "o_que_e"},
+      {"emoji": "\ud83d\udcb0", "text": "Quanto custa?", "next": "quanto_custa"},
+      {"emoji": "\ud83d\ude80", "text": "Como criar meu primeiro anuncio", "next": "criar_anuncio"},
+      {"emoji": "\ud83d\udcca", "text": "Tipos de anuncio", "next": "tipos"},
+      {"emoji": "\ud83c\udfac", "text": "Tutorial em video", "next": "video_ads"}
+    ]
+  },
+  "o_que_e": {
+    "question": "O que e Amazon Ads?",
+    "info": "Amazon Ads e a plataforma de publicidade da Amazon. Seus produtos aparecem em **destaque** nos resultados de busca e paginas de produto.",
+    "checklist": ["Seus produtos aparecem no TOPO da busca", "Voce so paga quando alguem CLICA (CPC)", "Aumenta visibilidade e vendas", "Voce define o orcamento diario", "Pode pausar a qualquer momento"],
+    "highlight": "Sellers que usam Ads vendem em media 30% mais que sellers sem anuncios!",
+    "options": [
+      {"emoji": "\ud83d\udcb0", "text": "Quanto custa?", "next": "quanto_custa"},
+      {"emoji": "\ud83d\ude80", "text": "Criar meu primeiro anuncio", "next": "criar_anuncio"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "quanto_custa": {
+    "question": "\ud83d\udcb0 Quanto custa anunciar?",
+    "info": "Voce define o quanto quer gastar! Funciona assim:",
+    "table": {
+      "headers": ["Item", "Detalhes"],
+      "rows": [
+        ["Modelo", "CPC (Custo por Clique)"],
+        ["Custo por clique", "A partir de R$ 0,20"],
+        ["Orcamento diario minimo", "R$ 1,00/dia"],
+        ["Orcamento recomendado", "R$ 10 a R$ 50/dia pra comecar"],
+        ["Cobranca", "So quando alguem clica!"],
+        ["Investimento ideal", "3% a 8% do faturamento"]
+      ]
+    },
+    "highlight": "Comece com R$ 10/dia e va aumentando conforme os resultados. Voce NAO paga por visualizacao, so por clique!",
+    "options": [
+      {"emoji": "\ud83d\ude80", "text": "Criar meu anuncio", "next": "criar_anuncio"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "tipos": {
+    "question": "Tipos de anuncio na Amazon:",
+    "table": {
+      "headers": ["Tipo", "O que e", "Ideal pra"],
+      "rows": [
+        ["Sponsored Products", "Anuncia produtos individuais na busca", "Todo mundo (comece aqui!)"],
+        ["Sponsored Brands", "Banner com sua marca no topo", "Quem tem Brand Registry"],
+        ["Sponsored Display", "Anuncios dentro e fora da Amazon", "Remarketing e audiencia"]
+      ]
+    },
+    "highlight": "Comece SEMPRE com **Sponsored Products**. E o mais simples e eficiente!",
+    "options": [
+      {"emoji": "\ud83d\ude80", "text": "Criar Sponsored Products", "next": "criar_anuncio"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "criar_anuncio": {
+    "question": "Como criar seu primeiro anuncio:",
+    "info": "Passo a passo para criar uma campanha de **Sponsored Products** (a mais recomendada pra comecar):",
+    "steps": ["Seller Central > Menu > Publicidade > Gerenciador de campanhas", "Clique 'Criar campanha'", "Escolha: Sponsored Products", "De um nome pra campanha (ex: 'Campanha Produto X')", "Defina orcamento diario (comece com R$ 10)", "Selecione: Segmentacao AUTOMATICA (mais facil!)", "Escolha os produtos que quer anunciar", "Defina lance (comece com sugestao da Amazon)", "Revise e publique!"],
+    "highlight": "Dica: Comece com segmentacao AUTOMATICA. A Amazon escolhe as palavras-chave pra voce. Depois de 2 semanas, veja o relatorio e otimize!",
+    "warning": "Seu produto precisa estar com Buy Box ativa pra aparecer no anuncio. Se nao esta ganhando Buy Box, resolva isso primeiro!",
+    "options": [
+      {"emoji": "\ud83c\udfac", "text": "Ver tutorial em video", "next": "video_ads"},
+      {"emoji": "\ud83d\udca1", "text": "Dicas pra otimizar", "next": "dicas_ads"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "dicas_ads": {
+    "question": "\ud83d\udca1 Dicas para otimizar seus anuncios:",
+    "checklist": ["Comece com segmentacao automatica (2 semanas)", "Depois veja quais palavras-chave converteram", "Crie campanha manual com essas palavras", "Negue palavras que gastam mas nao vendem", "Mantenha orcamento diario consistente", "Otimize imagens e titulo do produto (afeta Ads!)", "Acompanhe ACOS (custo de venda) - ideal abaixo de 30%", "Nao pause e ligue toda hora (o algoritmo precisa aprender)"],
+    "highlight": "Regra de ouro: Deixe a campanha rodar por pelo menos **2 semanas** antes de fazer mudancas grandes!",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "criar_anuncio"}
+    ]
+  },
+  "video_ads": {
+    "question": "\ud83c\udfac Tutorial em video - Como criar Ads:",
+    "info": "Assista o passo a passo completo:",
+    "options": [
+      {"emoji": "\ud83c\udfac", "text": "Como criar campanha de Ads (video)", "link": "https://www.youtube.com/watch?v=E4fSFX9hYQo&t=509s"},
+      {"emoji": "\ud83d\udd17", "text": "Site oficial Amazon Ads", "link": "https://advertising.amazon.com/pt-br"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  }
+}
