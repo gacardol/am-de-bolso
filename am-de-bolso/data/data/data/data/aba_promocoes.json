@@ -1,0 +1,84 @@
+{
+  "inicio": {
+    "question": "Promocoes e Cupons \ud83c\udff7\ufe0f",
+    "info": "Promocoes aumentam vendas e visibilidade! A Amazon tem 4 tipos de promocao:",
+    "options": [
+      {"emoji": "\ud83c\udf1f", "text": "Ofertas Especiais (Lightning Deals)", "next": "ofertas"},
+      {"emoji": "\ud83c\udff7\ufe0f", "text": "Cupons", "next": "cupons"},
+      {"emoji": "\ud83d\udcb8", "text": "Descontos no Preco", "next": "descontos"},
+      {"emoji": "\ud83d\udce6", "text": "Compre X Ganhe Y", "next": "compre_x"},
+      {"emoji": "\ud83e\udde0", "text": "Qual tipo usar? Comparativo", "next": "comparativo"},
+      {"emoji": "\ud83c\udfac", "text": "Tutorial em video", "next": "video_promo"}
+    ]
+  },
+  "comparativo": {
+    "question": "Qual promocao usar?",
+    "table": {
+      "headers": ["Tipo", "Ideal pra", "Custo"],
+      "rows": [
+        ["Ofertas Especiais", "Gerar urgencia (tempo limitado)", "Taxa por participacao"],
+        ["Cupons", "Atrair novos clientes", "R$ 0,60 por resgate"],
+        ["Descontos no Preco", "Limpar estoque / volume", "Sem custo extra"],
+        ["Compre X Ganhe Y", "Aumentar ticket medio", "Sem custo extra"]
+      ]
+    },
+    "highlight": "Comecando agora? Use **Cupons**! Sao faceis de criar e aparecem na busca com destaque verde.",
+    "options": [
+      {"emoji": "\ud83c\udff7\ufe0f", "text": "Criar cupom (recomendado!)", "next": "cupons"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "ofertas": {
+    "question": "\ud83c\udf1f Ofertas Especiais (Lightning Deals)",
+    "info": "Ofertas por **tempo limitado** que aparecem na pagina de Ofertas da Amazon. Geram urgencia e muito trafego!",
+    "checklist": ["Desconto minimo de 15% sobre o preco recente", "Produto precisa ter historico de vendas", "Taxa por participacao (varia)", "Duracao: 4 a 12 horas", "Aparece na pagina de Ofertas da Amazon", "Otimo para datas especiais (Prime Day, Black Friday)"],
+    "steps": ["Seller Central > Publicidade > Ofertas", "Veja quais produtos sao elegiveis", "Selecione o produto", "Defina o desconto (minimo 15%)", "Escolha a data", "Envie para aprovacao"],
+    "warning": "Nem todos os produtos sao elegiveis! A Amazon seleciona baseado no historico de vendas e avaliacao.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Criar oferta no Seller Central", "link": "https://sellercentral.amazon.com.br/deals"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "cupons": {
+    "question": "\ud83c\udff7\ufe0f Cupons",
+    "info": "Cupons aparecem com **destaque verde** nos resultados de busca. O cliente clica pra ativar e ganha desconto automatico!",
+    "checklist": ["Desconto de 5% a 50%", "Aparece na busca com badge verde", "Custo: R$ 0,60 por cupom resgatado", "Voce define orcamento maximo", "Pode limitar por tempo ou quantidade", "Excelente pra atrair novos clientes!"],
+    "steps": ["Seller Central > Publicidade > Cupons", "Clique 'Criar novo cupom'", "Selecione os produtos", "Defina desconto (% ou valor fixo)", "Defina orcamento e duracao", "Segmentacao: todos clientes ou Prime", "Revise e envie!"],
+    "highlight": "Dica: Cupom de 10% a 20% e o sweet spot - desconto atrativo sem comprometer demais a margem!",
+    "options": [
+      {"emoji": "\ud83c\udfac", "text": "Tutorial video: Como criar cupom", "link": "https://www.youtube.com/watch?v=bJYNWNwXU&t=3s"},
+      {"emoji": "\ud83d\udd17", "text": "Criar cupom no Seller Central", "link": "https://sellercentral.amazon.com.br/coupons"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "descontos": {
+    "question": "\ud83d\udcb8 Descontos no Preco",
+    "info": "Corte direto no preco! O cliente ve o preco antigo riscado e o novo com desconto. Simples e eficiente.",
+    "checklist": ["Sem custo extra (so o desconto em si)", "Preco antigo fica riscado (referencia visual)", "Pode definir por tempo limitado", "Bom pra limpar estoque ou competir em preco"],
+    "steps": ["Seller Central > Publicidade > Descontos no preco", "Selecione os produtos", "Defina o novo preco com desconto", "Defina periodo (data inicio e fim)", "Ative!"],
+    "highlight": "Funciona melhor quando o desconto e de pelo menos 20% - ai o cliente percebe valor real.",
+    "options": [
+      {"emoji": "\ud83c\udfac", "text": "Tutorial video: Descontos", "link": "https://www.youtube.com/watch?v=bJYNWNwXU&t=3s"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "compre_x": {
+    "question": "\ud83d\udce6 Compre X Ganhe Y",
+    "info": "Incentive o cliente a comprar mais! Exemplos:\\n- Compre 3, pague 2\\n- Compre 4, ganhe 15% de desconto\\n- 5% de desconto a vista (Pix)",
+    "checklist": ["Sem custo extra", "Aumenta ticket medio", "Incentiva compra em quantidade", "Pode combinar com desconto Pix (a vista)"],
+    "steps": ["Seller Central > Publicidade > Promocoes", "Selecione 'Compre X ganhe Y' ou 'A Vista'", "Defina as regras (ex: compre 4 ganhe 15%)", "Selecione produtos elegiveis", "Defina periodo", "Ative!"],
+    "highlight": "Dica: '5% de desconto a vista com Pix' funciona muito bem no Brasil!",
+    "options": [
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "video_promo": {
+    "question": "\ud83c\udfac Tutoriais em video:",
+    "info": "Aprenda a criar promocoes assistindo:",
+    "options": [
+      {"emoji": "\ud83c\udfac", "text": "Como criar Cupom e Desconto", "link": "https://www.youtube.com/watch?v=bJYNWNwXU&t=3s"},
+      {"emoji": "\ud83d\udd17", "text": "Site Amazon Ads (promocoes)", "link": "https://advertising.amazon.com/pt-br"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  }
+}
