@@ -1,0 +1,175 @@
+{
+  "inicio": {
+    "question": "Logistica \ud83d\ude9a",
+    "info": "Como enviar seus produtos pro cliente? A Amazon tem opcoes pra voce:",
+    "options": [
+      {"emoji": "\ud83d\udce6", "text": "FBA (Amazon envia por voce)", "next": "fba"},
+      {"emoji": "\ud83d\ude9a", "text": "DBA (Voce envia com frete Amazon)", "next": "dba"},
+      {"emoji": "\ud83c\udfe0", "text": "Envio proprio (seu frete)", "next": "proprio"},
+      {"emoji": "\ud83e\udde0", "text": "Qual escolher? Comparativo", "next": "comparativo"},
+      {"emoji": "\ud83d\udcb0", "text": "Calculadora de custos (aproximada)", "next": "calculadora"}
+    ]
+  },
+  "comparativo": {
+    "question": "Qual tipo de envio escolher?",
+    "table": {
+      "headers": ["", "FBA", "DBA", "Proprio"],
+      "rows": [
+        ["Quem envia?", "Amazon", "Voce (frete Amazon)", "Voce (seu frete)"],
+        ["Selo Prime?", "Sim!", "Sim!", "Nao"],
+        ["Armazenamento", "Amazon guarda", "Voce guarda", "Voce guarda"],
+        ["Custo envio", "Tabela FBA", "Tabela DBA", "Voce define"],
+        ["Atendimento pos-venda", "Amazon faz", "Voce faz", "Voce faz"],
+        ["Ideal pra", "Escalar vendas", "Controle + Prime", "Inicio/teste"]
+      ]
+    },
+    "highlight": "Dica: FBA e o melhor pra escalar! Selo Prime + Amazon cuida de tudo. DBA e bom se quer controle do estoque.",
+    "options": [
+      {"emoji": "\ud83d\udce6", "text": "Quero FBA!", "next": "fba"},
+      {"emoji": "\ud83d\ude9a", "text": "Quero DBA!", "next": "dba"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "fba": {
+    "question": "\ud83d\udce6 FBA - Fulfillment by Amazon",
+    "info": "A Amazon **armazena, embala e envia** seus produtos! Voce manda o estoque pro centro de distribuicao (CD) e a Amazon faz o resto.",
+    "checklist": ["Selo Prime (mais visibilidade!)", "Amazon embala e envia", "Atendimento ao cliente pela Amazon", "Devolucoes gerenciadas pela Amazon", "Frete gratis pro cliente (Prime)"],
+    "options": [
+      {"emoji": "\u2753", "text": "Como funciona?", "next": "fba_como"},
+      {"emoji": "\ud83d\udcb0", "text": "Quanto custa?", "next": "fba_custos"},
+      {"emoji": "\ud83d\udccb", "text": "Como ativar FBA?", "next": "fba_ativar"},
+      {"emoji": "\ud83d\udd17", "text": "Pagina oficial FBA", "link": "https://venda.amazon.com.br/cresca/fba"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "fba_como": {
+    "question": "Como funciona o FBA?",
+    "steps": ["Voce envia produtos pro Centro de Distribuicao Amazon", "Amazon recebe e armazena", "Cliente compra seu produto", "Amazon embala e envia (frete Prime!)", "Amazon cuida do atendimento pos-venda", "Voce recebe o pagamento normalmente"],
+    "info": "Voce so precisa se preocupar em **repor estoque** e manter seus listings atualizados!",
+    "options": [
+      {"emoji": "\ud83d\udcb0", "text": "Quanto custa?", "next": "fba_custos"},
+      {"emoji": "\ud83d\udccb", "text": "Como ativar?", "next": "fba_ativar"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "fba"}
+    ]
+  },
+  "fba_custos": {
+    "question": "Custos FBA (aproximados):",
+    "info": "O FBA cobra por **armazenamento** + **fulfillment** (envio):",
+    "table": {
+      "headers": ["Tipo", "Descricao", "Valor aprox."],
+      "rows": [
+        ["Fulfillment", "Envio ao cliente (por unidade)", "R$ 6 a R$ 25+"],
+        ["Armazenamento", "Por m3/mes", "R$ 250 a R$ 450/m3"],
+        ["Armazenamento longo", "Itens parados 180+ dias", "Taxa adicional"]
+      ]
+    },
+    "warning": "Valores APROXIMADOS! O custo exato depende do peso, tamanho e categoria. Consulte sempre o site oficial.",
+    "highlight": "Dica: produtos pequenos e leves tem custo FBA menor. Ideais pra comecar!",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Calculadora oficial FBA", "link": "https://venda.amazon.com.br/cresca/fba#custos"},
+      {"emoji": "\ud83d\udccb", "text": "Como ativar FBA?", "next": "fba_ativar"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "fba"}
+    ]
+  },
+  "fba_ativar": {
+    "question": "Como ativar FBA nos seus produtos:",
+    "steps": ["Seller Central > Estoque > Gerenciar estoque", "Selecione o produto que quer colocar no FBA", "Clique em 'Alterar para Enviado pela Amazon'", "Configure o envio (crie uma remessa)", "Embale os produtos conforme instrucoes", "Envie pro Centro de Distribuicao", "Quando chegar e for processado = ativo com Prime!"],
+    "info": "Primeira vez? O sistema te guia passo a passo na criacao da remessa.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Pagina oficial FBA", "link": "https://venda.amazon.com.br/cresca/fba"},
+      {"emoji": "\u2705", "text": "Ativei! Sucesso!", "next": "sucesso_logistica"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "fba"}
+    ]
+  },
+  "dba": {
+    "question": "\ud83d\ude9a DBA - Delivery by Amazon",
+    "info": "Voce **guarda o estoque** mas usa o **frete da Amazon**. O entregador da Amazon coleta na sua casa/empresa!",
+    "checklist": ["Selo Prime!", "Frete competitivo (tabela Amazon)", "Coleta no seu endereco", "Voce embala, Amazon entrega", "Rastreamento automatico"],
+    "options": [
+      {"emoji": "\u2753", "text": "Como funciona?", "next": "dba_como"},
+      {"emoji": "\ud83d\udcb0", "text": "Quanto custa?", "next": "dba_custos"},
+      {"emoji": "\ud83d\udccb", "text": "Como ativar DBA?", "next": "dba_ativar"},
+      {"emoji": "\ud83d\udd17", "text": "Pagina oficial DBA", "link": "https://sellercentral.amazon.com/help/hub/reference/external/G201379690"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "dba_como": {
+    "question": "Como funciona o DBA?",
+    "steps": ["Cliente compra seu produto", "Voce embala o pedido", "Agenda coleta (ou espera coleta automatica)", "Entregador Amazon passa no seu endereco", "Amazon entrega pro cliente com rastreamento", "Cliente recebe com selo Prime!"],
+    "info": "A coleta acontece no endereco cadastrado. Voce embala e deixa pronto!",
+    "options": [
+      {"emoji": "\ud83d\udcb0", "text": "Quanto custa?", "next": "dba_custos"},
+      {"emoji": "\ud83d\udccb", "text": "Como ativar?", "next": "dba_ativar"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "dba"}
+    ]
+  },
+  "dba_custos": {
+    "question": "Custos DBA (aproximados):",
+    "info": "O DBA cobra apenas o **frete** (sem armazenamento, pois fica com voce):",
+    "table": {
+      "headers": ["Peso", "Mesma cidade", "Mesmo estado", "Outro estado"],
+      "rows": [
+        ["Ate 300g", "~R$ 7", "~R$ 10", "~R$ 15"],
+        ["300g a 1kg", "~R$ 9", "~R$ 13", "~R$ 20"],
+        ["1kg a 3kg", "~R$ 12", "~R$ 18", "~R$ 28"],
+        ["3kg a 5kg", "~R$ 15", "~R$ 22", "~R$ 35"],
+        ["5kg+", "~R$ 20+", "~R$ 30+", "~R$ 45+"]
+      ]
+    },
+    "warning": "Valores APROXIMADOS! Consulte a tabela oficial no Seller Central para precos exatos e atualizados.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Ver tabela oficial", "link": "https://sellercentral.amazon.com.br/help/hub/reference/G202182100"},
+      {"emoji": "\ud83d\udccb", "text": "Como ativar DBA?", "next": "dba_ativar"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "dba"}
+    ]
+  },
+  "dba_ativar": {
+    "question": "Como ativar DBA:",
+    "steps": ["Seller Central > Configuracoes > Configuracoes de envio", "Ative o DBA (Delivery by Amazon)", "Configure seu endereco de coleta", "Defina horarios disponiveis pra coleta", "Pronto! Seus produtos terao selo Prime"],
+    "info": "Apos ativar, quando vender, o sistema agenda a coleta automaticamente.",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Tutorial completo DBA", "link": "https://sellercentral.amazon.com/help/hub/reference/external/G201379690"},
+      {"emoji": "\u2705", "text": "Ativei!", "next": "sucesso_logistica"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "dba"}
+    ]
+  },
+  "proprio": {
+    "question": "\ud83c\udfe0 Envio Proprio (MFN)",
+    "info": "Voce mesmo envia usando Correios, transportadora ou proprio veiculo. Sem selo Prime.",
+    "checklist": ["Voce define o frete", "Voce escolhe transportadora", "Precisa informar rastreamento", "SEM selo Prime", "Total controle do processo"],
+    "highlight": "Indicado pra quem esta comecando ou tem logistica propria muito eficiente.",
+    "warning": "Sem selo Prime suas vendas podem ser menores. Considere migrar pra FBA ou DBA quando possivel!",
+    "options": [
+      {"emoji": "\ud83d\ude9a", "text": "Quero migrar pra DBA", "next": "dba_ativar"},
+      {"emoji": "\ud83d\udce6", "text": "Quero migrar pra FBA", "next": "fba_ativar"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "calculadora": {
+    "question": "\ud83d\udcb0 Calculadora de custos (aproximada)",
+    "info": "Para ter uma ideia de quanto vai gastar com logistica, considere:",
+    "table": {
+      "headers": ["Modelo", "Custo fixo", "Custo por envio"],
+      "rows": [
+        ["FBA", "Armazenamento mensal", "R$ 6 a R$ 25+ por unidade"],
+        ["DBA", "Nenhum", "R$ 7 a R$ 45+ por envio"],
+        ["Proprio", "Nenhum", "Voce define (Correios/transp.)"]
+      ]
+    },
+    "highlight": "Conta rapida FBA:\\nPreco de venda - Comissao Amazon - Custo FBA - Custo do produto = Seu lucro",
+    "warning": "Use a calculadora oficial da Amazon para valores exatos!",
+    "options": [
+      {"emoji": "\ud83d\udd17", "text": "Calculadora oficial Amazon", "link": "https://venda.amazon.com.br/cresca/fba#custos"},
+      {"emoji": "\ud83d\udd19", "text": "Voltar", "next": "inicio"}
+    ]
+  },
+  "sucesso_logistica": {
+    "question": "Logistica configurada! \ud83c\udf89",
+    "success": "Agora seus produtos tem envio configurado!",
+    "options": [
+      {"emoji": "\ud83d\udccb", "text": "Como processar pedidos", "next": "pedidos"},
+      {"emoji": "\ud83d\udce6", "text": "Listar produtos", "next": "listar"},
+      {"emoji": "\ud83c\udfe0", "text": "Inicio", "next": "inicio"}
+    ]
+  }
+}
